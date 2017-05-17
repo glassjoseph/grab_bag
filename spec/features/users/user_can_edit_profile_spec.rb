@@ -22,11 +22,13 @@ RSpec.feature "User edits their profile page" do
 
       click_on "Update Profile"
 
+      expect(page).to have_content("Profile Updated")
       expect(current_path).to eq("#{user.username}/dashboard")
       expect(page).to have_content("Name: Confucius")
       expect(page).to have_content("Username: #{user.username}")
       expect(page).to have_content("Phone Number: 9999999999")
       expect(page).to have_content("Email: c@c.com")
+
     end
   end
 end

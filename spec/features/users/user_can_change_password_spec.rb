@@ -21,6 +21,7 @@ RSpec.feature "User changes their password" do
       click_on "Update Password"
 
       expect(current_path).to eq("#{user.username}/dashboard")
+      expect(page).to have_content("Password Updated")
       expect(user.password).to eq("new_password")
     end
   end
