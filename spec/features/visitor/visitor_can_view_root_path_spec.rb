@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSPEC.feature 'Visitor can view root path' do
+RSpec.feature 'Visitor can view root path' do
   context 'when she is not logged in nor a registered user' do
     scenario 'she can see the root path with welcome message and login button' do
       visit '/'
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(landing_page_path)
       expect(page).to have_content('Welcome to Grab Bag!')
-      within('.nav') do
-        expect(page).to have_button('Login')
+      within('.welcome') do
+        expect(page).to have_button('Login with Facebook')
       end
     end
   end
