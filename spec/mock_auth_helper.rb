@@ -7,17 +7,15 @@ RSpec.configure do
     {"provider"=>"facebook",
  "uid"=>"10103559484486366",
  "info"=>
-  {"email"=>"jhg2v@virginia.edu",
-   "name"=>"Joseph Glass",
+  {"email"=>ENV['facebook_email'],
+   "name"=>ENV['facebook_name'],
    "image"=>"http://graph.facebook.com/v2.6/10103559484486366/picture"},
  "credentials"=>
-  {"token"=>
-    "EAAa4ZA9daWHABAEZC9llpZCsHsLfKQqyYWyrV1KrkKU0b7ZB1YkGkwaviQa6HJogiZBfzKgvZAm40MYvsFvMfC8hLDrQ98fTiZC9EqFj8puGtEYml
-7UazrxatXKcRQSNhaIZAEvxua7tulyb1AxK4IjLdXpv4oAFhR8ZD",
+  {"token"=> ENV['facebook_token'],
    "expires_at"=>1500238611,
 
    "expires"=>true},
- "extra"=>{"raw_info"=>{"name"=>"Joseph Glass", "email"=>"jhg2v@virginia.edu", "id"=>"10103559484486366"}}}
+ "extra"=>{"raw_info"=>{"name"=>ENV['facebook_name'], "email"=>ENV['facebook_email'], "id"=>"10103559484486366"}}}
 
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(auth_hash)
   end
