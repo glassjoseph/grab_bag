@@ -13,11 +13,12 @@ RSpec.feature "Visitor can create an account" do
 
       expect(current_path).to eq('/sign_up')
 
-      fill_in "Phone:", with: "5555555555"
+      fill_in "Username", with: 'samistheman'
+      fill_in "Phone", with: "5555555555"
 
       click_on "Create Account"
 
-      expect(current_path).to ("dummyuser/home")
+      expect(current_path).to ("samistheman/home")
       expect(page).to have_content("Account Created!")
     end
   end
