@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.feature "Visitor can create an account" do
   context "As a visitor not in database" do
 
@@ -23,13 +22,3 @@ RSpec.feature "Visitor can create an account" do
     end
   end
 end
-
-
-# As a visitor
-# And I do not have a FBID in the database
-# If I click login with Facebook
-# I log in with Facebook, authorize
-# I should be redirected to a page where I enter a phone number
-# I click 'Create Account'
-# I will be redirected to my home folder
-# I see a flash message 'Account Created!"
