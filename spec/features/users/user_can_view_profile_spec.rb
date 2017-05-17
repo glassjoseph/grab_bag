@@ -18,14 +18,3 @@ RSpec.feature "User visits their profile page" do
     end
   end
 end
-
-
-
-As a user
-When I click on 'My Profile'
-I expect current route to be ':username/dashboard'
-I expect to see my user Name
-I expect to see a phone number
-I expect to see my email
-I expect to see a button that says "Edit Profile"
-I expect to see a button that says "Change Password"
