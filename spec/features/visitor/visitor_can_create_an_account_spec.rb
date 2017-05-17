@@ -1,9 +1,10 @@
 require 'rails_helper'
+require 'mock_auth_helper'
 
 RSpec.feature "Visitor can create an account" do
   context "As a visitor not in database" do
 
-    xit "visitor can create an account" do
+    it "visitor can create an account" do
       Capybara.app = GrabBag::Application
       stub_oauth
 
