@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get 'folders/show'
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'landing#index', as: :landing_page
 
   get '/auth/facebook', as: :facebook_login
@@ -10,4 +9,5 @@ Rails.application.routes.draw do
   post '/sign_up', to: 'sign_up#create'
   get '/:username/*route', to: 'folders#show', as: :folder
 
+  resources :folders, only: [:index]
 end
