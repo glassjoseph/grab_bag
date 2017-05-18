@@ -22,6 +22,6 @@ class User < ApplicationRecord
 private
 
   def make_home
-    owned_folders.create(name: 'home', route: 'home')
+    owned_folders.new(name: 'home', route: 'home').save(validate: false)
   end
 end
