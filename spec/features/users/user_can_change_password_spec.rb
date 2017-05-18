@@ -6,7 +6,7 @@ RSpec.feature "User changes their password" do
       user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit "#{user.nickname}/dashboard"
+      visit "#{user.username}/dashboard"
       click_on "Change Password"
 
 
