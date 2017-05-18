@@ -9,7 +9,7 @@ RSpec.feature "User visits the root page" do
 
       visit '/'
 
-      expect(current_path).to eq("#{user.username}/home")
+      expect(current_path).to eq("/#{user.username}/home")
     end
   end
 end
