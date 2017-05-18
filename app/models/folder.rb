@@ -16,6 +16,13 @@ class Folder < ApplicationRecord
 
   enum permission: %w(personal global)
 
+  before_create :get_user
+
+  def get_user
+    user_id = parent.user_id if parent
+    # require "pry"; binding.pry
+  end
+
   def children
     binaries | folders
   end

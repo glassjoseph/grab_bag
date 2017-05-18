@@ -6,11 +6,8 @@ RSpec.describe User do
       is_expected.to validate_presence_of :username
       is_expected.to validate_presence_of :email
       is_expected.to validate_presence_of :name
-      is_expected.to validate_presence_of :fb_id
-      is_expected.to validate_presence_of :avatar_url
       is_expected.to validate_presence_of :status
       is_expected.to validate_presence_of :phone
-      is_expected.to validate_presence_of :token
       is_expected.to validate_uniqueness_of(:username).ignoring_case_sensitivity
     end
   end
@@ -30,11 +27,36 @@ RSpec.describe User do
     end
   end
 
-  # context 'relationships' do
-  #   it 'has many orders' do
-  #     user = User.create()
-  #   end
-  # end
+  context 'relationships' do
+    it "has one home folder" do
+      user = create(:user)
+
+      expect(user.home).to be_a(Folder)
+      expect(user.home).to be_in(user.owned_folders)
+    end
+
+    it 'has many folders_shared_with' do
+      user = create(:user)
+      folder = user.home
+      shared_folder = create :folder, parent: folder
+      user.folders_shared_with << shared_folder
+
+      expect(shared_folder).to be_in(user.folders_shared_with)
+    end
+
+    it "has_many owned_folders" do
+      user = create(:user)
+      home = user.home
+      folder1 = create :folder, parent: home, owner: user
+      folder2 = create :folder, parent: home, owner: user
+      folder1.folders << folder2
+      home.folders << folder1
+
+      expect(home).to be_in(user.owned_folders)
+      expect(folder1).to be_in(user.owned_folders)
+      expect(folder2).to be_in(user.owned_folders)
+    end
+  end
 
 
   context 'enums' do
