@@ -11,11 +11,7 @@ RSpec.feature "User edits their profile page" do
 
 
       expect(page).to have_selector("input")
-      expect(page).to have_selector("input")
-      expect(page).to have_selector("input")
 
-      # expect(page).to_not have_selector("input", value: user.username)
-      save_and_open_page
       fill_in "user[name]", with: "Confucius"
       fill_in "user[phone]", with: "9999999999"
       fill_in "user[email]", with: "c@c.com"
