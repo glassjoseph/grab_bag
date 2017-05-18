@@ -7,10 +7,8 @@ RSpec.feature 'user visits file show page' do
 
       stub_oauth
 
-      folder = create(:folder)
-      file = create(:binary)
-      folder.files << file
-      user.folders << folder
+      folder = create(:folder, user: user)
+      file = create(:binary, folder: folder)
 
       visit "/#{user.username}/#{folder.name}"
 
