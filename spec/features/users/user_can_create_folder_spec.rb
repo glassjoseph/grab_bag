@@ -9,19 +9,19 @@ RSpec.feature "User can create a new folder" do
       visit "/#{user.username}/home"
       click_on "New Folder"
 
-      expect(current_path).to eq("/#{user.username}/folder/new")
-      fill_in "Folder Name", with: "Sweet jams"
-      choose "Public"
+      expect(current_path).to eq("/#{user.username}/folders/new")
+      fill_in "folder[name]", with: "Sweet jams"
+      choose "folder_permission_personal"
       click_on "Create"
 
       expect(page).to have_content("Folder Successfully Created!")
-      expect(Folder.last.public?).to be_true
+      expect(Folder.last.personal?).to be true
 
       # use parameterize for folder-path creation.
       expect(current_path).to eq("/#{user.username}/home/sweet-jams")
     end
 
-    it "user's new folder is private by default" do
+    xit "user's new folder is private by default" do
       user = create(:user)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -34,7 +34,7 @@ RSpec.feature "User can create a new folder" do
       click_on "Create"
 
       expect(page).to have_content("Folder Successfully Created!")
-      expect(Folder.last.private?).to be_true
+      expect(Folder.last.private?).to be true
       expect(current_path).to eq("/#{user.username}/home/folder")
     end
   end

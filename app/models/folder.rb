@@ -2,6 +2,9 @@ class Folder < ApplicationRecord
   validates :name, presence: true
   validates :route, presence: true
 
+  validates :slug, presence: true, uniqueness: true
+
+
   has_many :shared_folders
   has_many :users_shared_with, through: :shared_folders
 
@@ -18,5 +21,9 @@ class Folder < ApplicationRecord
 
   def children
     binaries | folders
+  end
+
+  def slug
+    name.parameterize
   end
 end

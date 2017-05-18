@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :username, case_sensitive: false
 
   enum status: %w(active inactive)
-  
+
   has_many :shared_folders
   has_many :folders_shared_with, through: :shared_folders, source: :folder
   has_many :owned_folders, class_name: "Folder", foreign_key: "user_id"
@@ -31,6 +31,6 @@ class User < ApplicationRecord
 private
 
   def make_home
-    owned_folders.new(name: 'home', route: 'home').save(validate: false)
+    owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
   end
 end
