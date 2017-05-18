@@ -33,7 +33,8 @@ RSpec.describe Binary do
     end
 
     it 'is valid with a name, folder and data' do
-      folder = create :folder
+      user = create :user
+      folder = user.home
       file = Binary.new(name: 'sam.pdf', content_type: '.pdf', folder: folder, data: text)
 
       expect(file).to be_valid
@@ -51,7 +52,8 @@ RSpec.describe Binary do
 
   context 'relationships' do
     it 'has a folder' do
-      folder = create :folder
+      user = create :user
+      folder = user.home
 
       file = Binary.new(name: 'sam.pdf', folder: folder, data: text)
     end

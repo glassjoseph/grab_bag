@@ -14,6 +14,8 @@ class Folder < ApplicationRecord
 
   has_many :binaries
 
+  enum
+
   def children
     binaries | folders
   end
