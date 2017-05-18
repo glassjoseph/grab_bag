@@ -5,7 +5,7 @@ class SignUpController < ApplicationController
 
   def create
     user = User.create(user_params)
-    session[:id] = user.id
+    session[:user_id] = user.id
     redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
   end
 
