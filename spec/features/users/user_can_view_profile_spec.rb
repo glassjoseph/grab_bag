@@ -7,9 +7,10 @@ RSpec.feature "User visits their profile page" do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
+      visit "/#{user.username}/home"
       click_on "My Profile"
 
-      expect(current_path).to eq("#{user.nickname}/dashboard")
+      expect(current_path).to eq("/#{user.username}/dashboard")
       expect(page).to have_content("Name: #{user.name}")
       expect(page).to have_content("Phone Number: #{user.phone}")
       expect(page).to have_content("Email: #{user.email}")

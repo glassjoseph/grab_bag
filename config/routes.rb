@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
   get '/sign_up', to: 'sign_up#new'
   post '/sign_up', to: 'sign_up#create'
+  get '/:username/dashboard', to: 'users#show', as: :dashboard
+  get '/:username/dashboard/edit', to: 'users#edit', as: :dashboard_edit
+  get '/:username/dashboard/change_password', to: 'passwords#edit', as: :password_edit
   get '/:username/*route', to: 'folders#show', as: :folder
 
   resources :folders, only: [:index]
