@@ -1,0 +1,47 @@
+require 'rails_helper'
+
+RSpec.describe Binary do
+  attr_reader :text
+
+  before do
+    @text = File.read('../test.txt')
+  end
+
+  context 'Attributes' do
+    it 'is invalid without a name' do
+      file = Binary.new(folder_id: 1, data: text)
+
+      expect(file).to_not be_valid
+    end
+
+    it 'is invalid without a folder' do
+      file = Binary.new(name: 'sam.pdf', data: text)
+
+      expect(file).to_not be_valid
+    end
+
+    it 'is invalid without data' do
+      file = Binary.new(name: 'sam.pdf', folder_id: 1)
+
+      expect(file).to_not be_valid
+    end
+
+    it 'is valid with a name, folder and data' do
+      file = Binary.new(name: 'sam.pdf', folder_id: 1, data: text)
+
+      expect(file).to be_valid
+    end
+
+    it 'responds to name, folder and data' do
+      expect(file).to respond_to :name
+      expect(file).to respond_to :folder
+      expect(file).to respond_to :data
+    end
+  end
+
+  context 'relationships' do
+    it 'has a folder' do
+      file = Binary.new(name: 'sam.pdf', folder_id: 1, data: text)
+    end
+  end
+end

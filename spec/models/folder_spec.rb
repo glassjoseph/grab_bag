@@ -32,13 +32,13 @@ RSpec.describe Folder do
       expect(folder.permission).to eq 'private'
     end
 
-    it 'responds to name, owner, permission, route, folders, files, parent, children' do
+    it 'responds to name, owner, permission, route, folders, binaries, parent, children' do
       expect(folder).to respond_to :name
       expect(folder).to respond_to :owner
       expect(folder).to respond_to :permission
       expect(folder).to respond_to :route
       expect(folder).to respond_to :folders
-      expect(folder).to respond_to :files
+      expect(folder).to respond_to :binaries
       expect(folder).to respond_to :parent
       expect(folder).to respond_to :children
     end
@@ -51,15 +51,15 @@ RSpec.describe Folder do
       @folder = create :folder
     end
 
-    it 'has many files' do
-      file1 = create :file
-      file2 = create :file
+    it 'has many binaries' do
+      binary1 = create :binary
+      binary2 = create :binary
 
-      folder.files << file1
-      folder.files << file2
+      folder.binaries << binary1
+      folder.binaries << binary2
 
-      expect(file1).to be_in folder.files
-      expect(file2).to be_in folder.files
+      expect(binary1).to be_in folder.binaries
+      expect(binary2).to be_in folder.binaries
     end
 
     it 'has many folders' do
@@ -83,18 +83,18 @@ RSpec.describe Folder do
     it 'has many children' do
       folder1 = create :folder
       folder2 = create :folder
-      file1 = create :file
-      file2 = create :file
+      binary1 = create :binary
+      binary2 = create :binary
 
       folder.folders << folder1
       folder.folders << folder2
-      folder.files << file1
-      folder.files << file2
+      folder.binaries << binary1
+      folder.binaries << binary2
 
       expect(folder1).to be_in folder.children
       expect(folder2).to be_in folder.children
-      expect(file1).to be_in folder.children
-      expect(file2).to be_in folder.children
+      expect(binary1).to be_in folder.children
+      expect(binary2).to be_in folder.children
     end
 
     it 'has an owner' do
