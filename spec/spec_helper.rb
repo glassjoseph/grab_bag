@@ -49,7 +49,7 @@ RSpec.configure do |config|
 
 
 
-  config.backtrace_clean_patterns = [
+  config.backtrace_exclusion_patterns = [
    /\/lib\d*\/ruby\//,
    /bin\//,
    /gems/,

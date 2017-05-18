@@ -1,0 +1,12 @@
+<%= form_for @user, url: sign_up_path do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone %>
+  <%= f.hidden_field :token, token: params[:token] %>
+  <%= f.hidden_field :name, real_name: params[:name] %>
+  <%= f.hidden_field :fb_id, fb_id: params[:fb_id] %>
+  <%= f.hidden_field :email, email: params[:email] %>
+  <%= f.hidden_field :avatar_url, avatar_url: params[:avatar_url] %>
+  <%= f.submit 'Create Account', class: 'btn' %>
+<% end %>
