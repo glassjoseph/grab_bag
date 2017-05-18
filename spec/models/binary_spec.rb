@@ -4,12 +4,13 @@ RSpec.describe Binary do
   attr_reader :text
 
   before do
-    @text = File.read('../test.txt')
+    @text = File.read('spec/test.txt')
   end
 
   context 'Attributes' do
     it 'is invalid without a name' do
       file = Binary.new(folder_id: 1, data: text)
+      byebug
 
       expect(file).to_not be_valid
     end
