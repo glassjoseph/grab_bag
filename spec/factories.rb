@@ -17,4 +17,8 @@ FactoryGirl.define do
     token ENV['facebook_token']
     avatar_url 'https://socwork.wisc.edu/files/joe-glass-lg.jpg'
   end
+
+  factory :folder do
+
+  end
 end
