@@ -20,7 +20,6 @@ class Folder < ApplicationRecord
 
   def get_user
     user_id = parent.user_id if parent
-    # require "pry"; binding.pry
   end
 
   def children
