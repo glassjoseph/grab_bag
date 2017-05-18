@@ -6,11 +6,8 @@ RSpec.describe User do
       is_expected.to validate_presence_of :username
       is_expected.to validate_presence_of :email
       is_expected.to validate_presence_of :name
-      is_expected.to validate_presence_of :fb_id
-      is_expected.to validate_presence_of :avatar_url
       is_expected.to validate_presence_of :status
       is_expected.to validate_presence_of :phone
-      is_expected.to validate_presence_of :token
       is_expected.to validate_uniqueness_of(:username).ignoring_case_sensitivity
     end
   end
