@@ -9,7 +9,7 @@ FactoryGirl.define do
     sequence :fb_id do |n|
       n.to_s
     end
-    status 'enabled'
+    status 'active'
     sequence :email do |n|
       "email#{n}@email.com"
     end

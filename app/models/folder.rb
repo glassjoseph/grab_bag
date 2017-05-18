@@ -14,7 +14,7 @@ class Folder < ApplicationRecord
 
   has_many :binaries
 
-  enum
+  enum permission: %w(personal global)
 
   def children
     binaries | folders

@@ -1,4 +1,13 @@
 class User < ApplicationRecord
+  validates :username, presence: true
+  validates :name, presence: true
+  validates :status, presence: true
+  validates :email, presence: true
+  validates :phone, presence: true
+  validates_uniqueness_of :username, case_sensitive: false
+
+  enum status: %w(active inactive)
+  
   has_many :shared_folders
   has_many :folders_shared_with, through: :shared_folders, source: :folder
   has_many :owned_folders, class_name: "Folder", foreign_key: "user_id"
