@@ -32,9 +32,9 @@ RSpec.describe Folder do
       expect(folder).to be_valid
     end
 
-    it 'has a default permission of "private"' do
+    it 'has a default permission of "personal"' do
       folder = Folder.create(name: 'sam', owner: user, route: 'home', parent: user.home)
-      expect(folder.permission).to eq 'private'
+      expect(folder.permission).to eq 'personal'
     end
 
     it 'responds to name, owner, permission, route, folders, binaries, parent, children' do
