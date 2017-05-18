@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20170518162757) do
     t.index ["user_id"], name: "index_folders_on_user_id", using: :btree
   end
 
-  create_table "user_folders", force: :cascade do |t|
+  create_table "shared_folders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "folder_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["folder_id"], name: "index_user_folders_on_folder_id", using: :btree
-    t.index ["user_id"], name: "index_user_folders_on_user_id", using: :btree
+    t.index ["folder_id"], name: "index_shared_folders_on_folder_id", using: :btree
+    t.index ["user_id"], name: "index_shared_folders_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,6 +62,6 @@ ActiveRecord::Schema.define(version: 20170518162757) do
   add_foreign_key "binaries", "folders"
   add_foreign_key "folders", "folders"
   add_foreign_key "folders", "users"
-  add_foreign_key "user_folders", "folders"
-  add_foreign_key "user_folders", "users"
+  add_foreign_key "shared_folders", "folders"
+  add_foreign_key "shared_folders", "users"
 end

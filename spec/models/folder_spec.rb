@@ -2,8 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Folder do
   context 'Attributes' do
+    attr_reader :user
+
+    before do
+      @user = create :user
+    end
+
     it 'is invalid without a name' do
-      folder = Folder.new(owner_id: 1, route: 'home')
+      folder = Folder.new(owner: user, route: 'home')
 
       expect(folder).to_not be_valid
     end
@@ -15,13 +21,13 @@ RSpec.describe Folder do
     end
 
     it 'is invalid without a route' do
-      folder = Folder.new(name: 'sam', owner_id: 1)
+      folder = Folder.new(name: 'sam', owner: user)
 
       expect(folder).to_not be_valid
     end
 
     it 'is valid with a name, owner and route' do
-      folder = Folder.new(name: 'sam', owner_id: 1, route: 'home')
+      folder = Folder.new(name: 'sam', owner: user, route: 'home')
 
       expect(folder).to be_valid
     end
@@ -98,7 +104,7 @@ RSpec.describe Folder do
     end
 
     it 'has an owner' do
-      user = create :user
+      user = create :owner
 
       user.folders << folder
 

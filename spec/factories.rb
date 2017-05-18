@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:owner] do
     sequence :name do |n|
       "Name ##{n}"
     end
@@ -19,6 +19,8 @@ FactoryGirl.define do
   end
 
   factory :folder do
-
+    name 'Factory Folder'
+    route 'home/factory-folder'
+    owner
   end
 end
