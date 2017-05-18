@@ -9,7 +9,7 @@ RSpec.describe Folder do
     end
 
     it 'is invalid without a name' do
-      folder = Folder.new(owner: user, route: 'home')
+      folder = Folder.new(owner: user, route: 'home', parent: user.home)
 
       expect(folder).to_not be_valid
     end
@@ -21,24 +21,25 @@ RSpec.describe Folder do
     end
 
     it 'is invalid without a route' do
-      folder = Folder.new(name: 'sam', owner: user)
+      folder = Folder.new(name: 'sam', owner: user, parent: user.home)
 
       expect(folder).to_not be_valid
     end
 
     it 'is valid with a name, owner and route' do
-      folder = Folder.new(name: 'sam', owner: user, route: 'home')
+      folder = Folder.new(name: 'sam', owner: user, route: 'home', parent: user.home)
 
       expect(folder).to be_valid
     end
 
     it 'has a default permission of "private"' do
-      folder = Folder.create(name: 'sam', owner_id: 1, route: 'home')
-
+      folder = Folder.create(name: 'sam', owner: user, route: 'home', parent: user.home)
       expect(folder.permission).to eq 'private'
     end
 
     it 'responds to name, owner, permission, route, folders, binaries, parent, children' do
+      folder = Folder.create(name: 'sam', owner: user, route: 'home', parent: user.home)
+
       expect(folder).to respond_to :name
       expect(folder).to respond_to :owner
       expect(folder).to respond_to :permission
@@ -51,51 +52,40 @@ RSpec.describe Folder do
   end
 
   context 'Relationships' do
-    attr_reader :folder
+    attr_reader :folder, :user
 
     before do
-      @folder = create :folder
+      @user = create :user
+      @folder = user.home
     end
 
     it 'has many binaries' do
-      binary1 = create :binary
-      binary2 = create :binary
-
-      folder.binaries << binary1
-      folder.binaries << binary2
+      binary1 = create :binary, folder: folder
+      binary2 = create :binary, folder: folder
 
       expect(binary1).to be_in folder.binaries
       expect(binary2).to be_in folder.binaries
     end
 
     it 'has many folders' do
-      folder1 = create :folder
-      folder2 = create :folder
 
-      folder.folders << folder1
-      folder.folders << folder2
+      folder1 = create :folder, parent: folder
+      folder2 = create :folder, parent: folder
 
       expect(folder1).to be_in folder.folders
     end
 
     it 'has a parent' do
-      folder1 = create :folder
-
-      folder.folders << folder1
+      folder1 = create :folder, parent: folder
 
       expect(folder1.parent).to be folder
     end
 
     it 'has many children' do
-      folder1 = create :folder
-      folder2 = create :folder
-      binary1 = create :binary
-      binary2 = create :binary
-
-      folder.folders << folder1
-      folder.folders << folder2
-      folder.binaries << binary1
-      folder.binaries << binary2
+      folder1 = create :folder, parent: folder
+      folder2 = create :folder, parent: folder
+      binary1 = create :binary, folder: folder
+      binary2 = create :binary, folder: folder
 
       expect(folder1).to be_in folder.children
       expect(folder2).to be_in folder.children
@@ -104,11 +94,7 @@ RSpec.describe Folder do
     end
 
     it 'has an owner' do
-      user = create :owner
-
-      user.folders << folder
-
-      expect(folder.owner).to be user
+      expect(folder.owner).to eq user
     end
   end
 end

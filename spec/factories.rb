@@ -23,4 +23,12 @@ FactoryGirl.define do
     route 'home/factory-folder'
     owner
   end
+
+  factory :binary do
+    sequence :name do |n|
+      "File##{n}"
+    end
+    content_type 'txt'
+    data File.new('spec/test.txt')
+  end
 end

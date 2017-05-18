@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518162757) do
+ActiveRecord::Schema.define(version: 20170518205457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20170518162757) do
   create_table "folders", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.integer  "permission"
     t.integer  "folder_id"
     t.string   "route"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "permission", default: 0
     t.index ["folder_id"], name: "index_folders_on_folder_id", using: :btree
     t.index ["user_id"], name: "index_folders_on_user_id", using: :btree
   end
