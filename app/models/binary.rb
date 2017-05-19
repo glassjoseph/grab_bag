@@ -1,13 +1,13 @@
 class Binary < ApplicationRecord
   validates :name, presence: true
-  validates :content_type, presence: true
+  validates :extension, presence: true
   validates :data, presence: true
 
   belongs_to :folder
 
   def uploaded_file=(incoming_file)
     self.name = incoming_file.original_filename
-    self.content_type = incoming_file.content_type
+    self.extension = incoming_file.extension
     self.data = incoming_file.read
   end
 
@@ -16,7 +16,7 @@ class Binary < ApplicationRecord
   end
 
   def url
-    '/' + folder.owner.username + '/' + folder.route
+    folder.url + '/' + name + '.' + extension
   end
 
 private

@@ -30,16 +30,16 @@ FactoryGirl.define do
     sequence :name do |n|
       "File##{n}"
     end
-    content_type 'txt'
+    extension 'txt'
     data File.open('spec/test.txt')
 
     factory :image_binary do
-      content_type 'jpg'
+      extension 'jpg'
       data File.open('spec/test.jpg')
     end
 
     factory :unknown_content_type_binary do
-      content_type 'ummm'
+      extension 'ummm'
       data "I'm a number!"
     end
   end

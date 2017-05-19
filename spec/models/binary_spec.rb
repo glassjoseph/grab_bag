@@ -9,7 +9,7 @@ RSpec.describe Binary do
 
   context 'Attributes' do
     it 'is invalid without a name' do
-      file = Binary.new(folder_id: 1, data: text, extention: 'txt')
+      file = Binary.new(folder_id: 1, data: text, extension: 'txt')
 
       expect(file).to_not be_valid
     end
@@ -21,13 +21,13 @@ RSpec.describe Binary do
     end
 
     it 'is invalid without a folder' do
-      file = Binary.new(name: 'sam.pdf', data: text, extention: 'txt')
+      file = Binary.new(name: 'sam.pdf', data: text, extension: 'txt')
 
       expect(file).to_not be_valid
     end
 
     it 'is invalid without data' do
-      file = Binary.new(name: 'sam.pdf', folder_id: 1, extention: 'txt')
+      file = Binary.new(name: 'sam.pdf', folder_id: 1, extension: 'txt')
 
       expect(file).to_not be_valid
     end
