@@ -20,10 +20,10 @@ RSpec.describe Folder do
       expect(folder).to_not be_valid
     end
 
-    it 'is invalid without a route' do
+    it 'is valid without a route' do
       folder = Folder.new(name: 'sam', owner: user, parent: user.home)
 
-      expect(folder).to_not be_valid
+      expect(folder).to be_valid
     end
 
     it 'is valid with a name, owner and route' do

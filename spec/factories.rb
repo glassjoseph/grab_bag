@@ -22,9 +22,6 @@ FactoryGirl.define do
     sequence :name do |n|
       "Factory Folder#{n}"
     end
-    sequence :route do |n|
-      "home/factory-folder#{n}"
-    end
     owner
   end
 
