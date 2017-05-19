@@ -2,9 +2,9 @@ class Folder < ApplicationRecord
   validates :name, presence: true
   validates :route, presence: true
 
-  validates :slug, presence: true
   validates :route, uniqueness: true
 
+  before_save :slugize
 
   has_many :shared_folders
   has_many :users_shared_with, through: :shared_folders
@@ -24,8 +24,8 @@ class Folder < ApplicationRecord
     binaries | folders
   end
 
-  def slug
-    name.parameterize
+  def slugize
+    self.slug = name.parameterize
   end
 
   def url

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "As a visitor", :type => :feature do
   scenario "when I click on the Grab Bag button in the navbar" do
-    visit folders_path
+    visit landing_page_path
 
     within '.navbar' do
       click_on 'Grab Bag'

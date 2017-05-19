@@ -19,8 +19,12 @@ FactoryGirl.define do
   end
 
   factory :folder do
-    name 'Factory Folder'
-    route 'home/factory-folder'
+    sequence :name do |n|
+      "Factory Folder#{n}"
+    end
+    sequence :route do |n|
+      "home/factory-folder#{n}"
+    end
     owner
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "User can view folder share page" do
   context "As a logged in User" do
-    it "User can view folder's share options" do
+    xit "User can view folder's share options" do
       user = create(:user_with_folders)
       folder = user.folders.last
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)

@@ -13,11 +13,11 @@ Rails.application.routes.draw do
 
   get '/:username/dashboard/change_password', to: 'passwords#edit', as: :password_edit
 
-  namespace :user, path: ":username" do
+  namespace :users, path: ":username" do
     resources :folders, only: [:index, :new, :create]
   end
 
-  get '/:username/*route', to: 'user/folders#show', as: :folder
+  get '/:username/*route', to: 'users/folders#show', as: :folder
 
   #send url of nested folders to folders#new?
 
