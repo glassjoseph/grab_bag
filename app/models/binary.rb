@@ -15,9 +15,14 @@ class Binary < ApplicationRecord
     write_attribute("name", sanitize_filename(new_filename))
   end
 
-  private
-    def sanitize_filename(filename)
-      just_filename = File.basename(filename)
-      just_filename.gsub(/[^\w\.\-]/, '_')
-    end
+  def url
+    '/' + folder.owner.username + '/' + folder.route
+  end
+
+private
+
+  def sanitize_filename(filename)
+    just_filename = File.basename(filename)
+    just_filename.gsub(/[^\w\.\-]/, '_')
+  end
 end
