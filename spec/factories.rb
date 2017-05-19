@@ -22,14 +22,25 @@ FactoryGirl.define do
     sequence :name do |n|
       "Factory Folder#{n}"
     end
+    route '/home'
     owner
   end
 
-  factory :binary do
+  factory :binary, aliases: [:text_binary] do
     sequence :name do |n|
       "File##{n}"
     end
     content_type 'txt'
-    data File.new('spec/test.txt')
+    data File.open('spec/test.txt')
+
+    factory :image_binary do
+      content_type 'jpg'
+      data File.open('spec/test.jpg')
+    end
+
+    factory :unknown_content_type_binary do
+      content_type 'ummm'
+      data "I'm a number!"
+    end
   end
 end
