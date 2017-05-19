@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
   get '/:username/dashboard/change_password', to: 'passwords#edit', as: :password_edit
 
+  resources :folders, only: [:index]
+
   namespace :users, path: ":username" do
-    resources :folders, only: [:index, :new, :create]
+    resources :folders, only: [:new, :create]
   end
 
   get '/:username/*route', to: 'users/folders#show', as: :folder

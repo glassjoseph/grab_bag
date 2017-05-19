@@ -10,30 +10,26 @@ RSpec.feature 'User can see a navbar' do
     end
 
     scenario 'Navbar from root path' do
-      visit root_path
+      visit landing_page_path
 
       within '.navbar' do
-        expect(page).to have_link 'Home'
+        expect(page).to have_link 'Grab Bag'
         expect(page).to have_link 'Public Folders'
-        within '.dropdown' do
-          expect(page).to have_link user.name
-          expect(page).to have_link 'Settings'
-          expect(page).to have_link 'Logout'
-        end
+        expect(page).to have_link 'My Profile'
+        expect(page).to have_link 'Logout'
       end
     end
 
     scenario 'Public folders button' do
-      folder1 = create :folder, status: :public
-      folder2 = create :folder, status: :public
-      folder3 = create :folder
+      folder1 = create :folder, owner: user, parent: user.home, permission: :global
+      folder2 = create :folder, owner: user, parent: user.home, permission: :global
+      folder3 = create :folder, owner: user, parent: user.home
 
-      visit root_path
+      visit landing_page_path
 
       click_on 'Public Folders'
 
       expect(current_path).to eq folders_path
-
       expect(page).to have_link folder1.name
       expect(page).to have_link folder2.name
       expect(page).to_not have_link folder3.name
