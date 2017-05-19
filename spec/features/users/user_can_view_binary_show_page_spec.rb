@@ -2,15 +2,18 @@ require 'rails_helper'
 
 RSpec.feature 'User can view a binary show page' do
   context 'User is logged in. Binary exists' do
-    scenario 'User clicks on a text file from a folder view' do
-      user = create :user
+    attr_reader :user, :folder
+
+    before do
+      @user = create :user
+      @folder = user.home
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    end
 
-      text = create :text_binary
+    scenario 'User clicks on a text file from a folder view' do
+      text = create :text_binary, folder: folder
 
-      user.home.binaries << text
-
-      visit folder_path(user.home)
+      visit folder.url
 
       click_on text.name
 
@@ -22,14 +25,7 @@ RSpec.feature 'User can view a binary show page' do
     end
 
     scenario 'User clicks on an image file from a folder view' do
-      user = create :user
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-
-      image = create :image_binary
-
-      user.home.binaries << image
-
-      visit folder_path(user.home)
+      image = create :image_binary, folder: folder
 
       click_on image.name
 
@@ -37,6 +33,18 @@ RSpec.feature 'User can view a binary show page' do
 
       within '.preview' do
         expect(page).to have_css "img[src*='#{image.name}']"
+      end
+    end
+
+    scenario 'User clicks on an unknown data type from folder view' do
+      unknown = create :unknown_content_type_binary, folder: folder
+
+      click_on unknown.name
+
+      expect(page).to have_link 'Download'
+
+      within '.preview' do
+        expect(page.body).to have_content "I can't display a preview of that data type."
       end
     end
   end
