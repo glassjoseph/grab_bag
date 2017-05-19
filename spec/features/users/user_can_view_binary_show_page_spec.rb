@@ -10,12 +10,20 @@ RSpec.feature 'User can view a binary show page' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     end
 
-    scenario 'User clicks on a text file from a folder view' do
-      text = create :text_binary, folder: folder
+    xscenario 'User clicks a binary from a folder view' do
+      binary = create :binary, folder: folder
 
       visit folder.url
 
-      click_on text.name
+      click_on binary.name
+
+      expect(current_path).to eq binary.url
+    end
+
+    scenario 'User clicks on a text file from a folder view' do
+      text = create :text_binary, folder: folder
+
+      visit text.url
 
       expect(page).to have_link 'Download'
 
@@ -27,7 +35,7 @@ RSpec.feature 'User can view a binary show page' do
     scenario 'User clicks on an image file from a folder view' do
       image = create :image_binary, folder: folder
 
-      click_on image.name
+      visit image.url
 
       expect(page).to have_link 'Download'
 
@@ -39,7 +47,7 @@ RSpec.feature 'User can view a binary show page' do
     scenario 'User clicks on an unknown data type from folder view' do
       unknown = create :unknown_content_type_binary, folder: folder
 
-      click_on unknown.name
+      visit unknown.url
 
       expect(page).to have_link 'Download'
 
