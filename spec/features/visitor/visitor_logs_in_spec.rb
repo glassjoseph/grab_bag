@@ -19,13 +19,5 @@ feature 'log_in' do
       expect(page).to have_link "Logout"
       expect(page).to_not have_link "Login"
     end
-
-    it 'And they log in without FB' do
-      user = create :user
-
-      visit login_path
-
-      fill_in 'username', with: user.username
-    end
   end
 end

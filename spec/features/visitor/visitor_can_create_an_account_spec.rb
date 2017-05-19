@@ -23,20 +23,22 @@ RSpec.feature "Visitor can create an account" do
 
     context 'A visitor tries to create an account with valid details' do
       scenario 'Visitor clicks create account from root' do
-        visit root_path
+        visit landing_page_path
 
-        click_on 'Signup'
+        click_on 'Create Account'
 
         expect(current_path).to sign_up_path
 
         fill_in 'user[username]', with: 'samiam'
+        fill_in 'user[password]', with: 'samiam'
+        fill_in 'user[password_confirmation]', with: 'samiam'
         fill_in 'user[name]', with: 'Sam L'
         fill_in 'user[email]', with: 'sam@sam.com'
         fill_in 'user[phone]', with: '55555555555'
 
         click_on 'Create Account'
 
-        expect(current_path).to eq folders_path(User.last.folders.first)
+        expect(current_path).to eq folder_path(User.last.folders.first, User.last.home)
 
         within '.flash' do
           expect(page).to have_content 'Account Created!'

@@ -35,7 +35,7 @@ gem 'figaro'
 gem 'figaro'
 gem 'omniauth-facebook'
 
-
+gem 'bcrypt'
 gem 'database_cleaner'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

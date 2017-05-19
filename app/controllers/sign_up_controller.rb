@@ -6,6 +6,7 @@ class SignUpController < ApplicationController
 
   def create
     user = User.from_omniauth(session[:user_info])
+    session.delete(:user_info)
     user.update(user_params)
     session[:user_id] = user.id
     redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
