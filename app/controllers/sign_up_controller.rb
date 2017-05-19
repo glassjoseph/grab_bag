@@ -1,10 +1,12 @@
 class SignUpController < ApplicationController
   def new
-    @user = User.from_omniauth(params[:info])
+    @user = User.new
+    session[:user_info] = params[:info]
   end
 
   def create
-    user = User.create(user_params)
+    user = User.from_omniauth(session[:user_info])
+    user.update(user_params)
     session[:user_id] = user.id
     redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
   end
@@ -12,6 +14,6 @@ class SignUpController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :token, :fb_id, :email, :avatar_url, :username, :phone)
+    params.require(:user).permit(:username, :phone)
   end
 end
