@@ -2,7 +2,8 @@ class Folder < ApplicationRecord
   validates :name, presence: true
   validates :route, presence: true
 
-  validates :route, uniqueness: true
+  # validates :route, uniqueness: true
+  validates :route, uniqueness: { scope: [:user_id] }
 
   before_save :slugize
 
@@ -19,6 +20,12 @@ class Folder < ApplicationRecord
   has_many :binaries
 
   enum permission: %w(personal global)
+
+  before_create :get_user
+
+  def get_user
+    user_id = parent.user_id if parent
+  end
 
   def children
     binaries | folders

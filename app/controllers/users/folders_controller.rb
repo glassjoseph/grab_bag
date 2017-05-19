@@ -28,8 +28,7 @@ class Users::FoldersController < ApplicationController
     folder = Folder.new(folder_params)
     if folder.update(user_id: parent_folder.owner.id,
                      route: new_route,
-                     folder_id: parent_folder.id,
-                     slug: folder.slug)
+                     folder_id: parent_folder.id)
 
       redirect_to folder.url, success: "Folder Successfully Created!"
     else
