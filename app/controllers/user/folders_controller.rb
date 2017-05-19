@@ -1,11 +1,13 @@
 class User::FoldersController < ApplicationController
 
   def show
+
     current_url = request.env["PATH_INFO"]
     username = current_url.split('/')[1]
-    parent_slug= current_url.split('/')[-1]
+    folder_route = current_url.split('/')[2..-1].join('/')
     user = User.find_by(username: username)
-    @current_folder = Folder.find_by(slug: parent_slug, user_id: user.id)
+
+    @current_folder = Folder.find_by(route: folder_route, user_id: user.id)
     session[:folder_id] = @current_folder.id
   end
 

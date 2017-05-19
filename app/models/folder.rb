@@ -2,7 +2,8 @@ class Folder < ApplicationRecord
   validates :name, presence: true
   validates :route, presence: true
 
-  validates :slug, presence: true, uniqueness: true
+  validates :slug, presence: true
+  validates :route, uniqueness: true
 
 
   has_many :shared_folders
