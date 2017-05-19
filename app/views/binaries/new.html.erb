@@ -1,0 +1,5 @@
+hello
+<%= form_tag '/binaries', method: :post, :multipart => true do %>
+  <%= file_field_tag 'binary' %>
+  <%= submit_tag "Send Binary" %>
+<% end %>
