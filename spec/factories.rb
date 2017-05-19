@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:owner] do
     sequence :name do |n|
       "Name ##{n}"
     end
@@ -19,5 +19,20 @@ FactoryGirl.define do
       token ENV['facebook_token']
       avatar_url 'https://socwork.wisc.edu/files/joe-glass-lg.jpg'
     end
+  end
+
+  factory :folder do
+    sequence :name do |n|
+      "Factory Folder#{n}"
+    end
+    owner
+  end
+
+  factory :binary do
+    sequence :name do |n|
+      "File##{n}"
+    end
+    content_type 'txt'
+    data File.new('spec/test.txt')
   end
 end
