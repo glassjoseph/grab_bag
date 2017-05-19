@@ -1,0 +1,15 @@
+
+
+THis is new
+
+
+<%= form_for @folder, url: "/#{current_user.username}/folders" do |f| %>
+  <%= f.label :name  %>
+  <%= f.text_field :name  %>
+  <%= f.label :private %>
+  <%= f.radio_button :permission, "personal", checked: true%>
+  <%= f.label :public %>
+  <%= f.radio_button :permission, "global" %>
+
+  <%= f.submit "Create" %>
+<% end %>

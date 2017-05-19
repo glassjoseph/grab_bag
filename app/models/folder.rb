@@ -2,6 +2,11 @@ class Folder < ApplicationRecord
   validates :name, presence: true
   validates :route, presence: true
 
+  # validates :route, uniqueness: true
+  validates :route, uniqueness: { scope: [:user_id] }
+
+  before_save :slugize
+
   has_many :shared_folders
   has_many :users_shared_with, through: :shared_folders
 
@@ -20,10 +25,17 @@ class Folder < ApplicationRecord
 
   def get_user
     user_id = parent.user_id if parent
-    # require "pry"; binding.pry
   end
 
   def children
     binaries | folders
+  end
+
+  def slugize
+    self.slug = name.parameterize
+  end
+
+  def url
+    '/' + owner.username + '/' + route
   end
 end
