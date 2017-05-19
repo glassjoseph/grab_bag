@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <a class="navbar-brand" href='<%= landing_page_path %>'>Grab Bag</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="nav navbar-nav">
+      <li>
+        <a class="nav-link" href='folders_path'>Public Folders</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <% if current_user %>
+          <a class="nav-link" href="facebook_logout_path">Logout</a>
+          <%= link_to "My Profile", dashboard_path(current_user.username) %>
+        <% else %>
+          <a class="nav-link" href="<%= facebook_login_path %>">Login With Facebook</a>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
