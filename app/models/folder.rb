@@ -26,4 +26,8 @@ class Folder < ApplicationRecord
   def slug
     name.parameterize
   end
+
+  def url
+    '/' + owner.username + '/' + route
+  end
 end

@@ -24,8 +24,8 @@ class User::FoldersController < ApplicationController
 
     folder = Folder.new(folder_params)
     folder.update(user_id: user.id, route: new_route, folder_id: parent.id, slug: folder.slug)
-
-    redirect_to folder_path(username: username, route: new_route ), success: "Folder Successfully Created!"
+    # require "pry"; binding.pry
+    redirect_to folder.url, success: "Folder Successfully Created!"
   end
 
 
