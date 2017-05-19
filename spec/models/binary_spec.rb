@@ -58,4 +58,14 @@ RSpec.describe Binary do
       file = Binary.new(name: 'sam.pdf', folder: folder, data: text)
     end
   end
+
+  context 'methods' do
+    it 'has a #url' do
+      user = create :user
+      folder = user.home
+      binary = create :binary, folder: folder
+
+      expect(binary.url).to eq '/' + user.username + '/' + folder.route
+    end
+  end
 end
