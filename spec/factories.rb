@@ -41,9 +41,10 @@ FactoryGirl.define do
       "File#{n}"
     end
     extension 'txt'
-    data_url 'https://textfiles.com/100/914bbs.txt'
+    data_url 'http://textfiles.com/100/914bbs.txt'
 
     factory :image_binary do
+      name 'imgur'
       extension 'jpg'
       data_url 'http://i.imgur.com/nBYOnvl.jpg'
     end

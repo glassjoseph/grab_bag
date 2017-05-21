@@ -24,11 +24,11 @@ RSpec.feature 'User can view a binary show page' do
       text = create :text_binary, folder: folder
 
       visit text.url
-      byebug
+
       expect(page).to have_link 'Download'
 
       within '.preview' do
-        expect(page.body).to have_content 'This is an example text file.'
+        expect(page.body).to have_content 'SUFFICIENT CREDIT SHOULD BE GIVEN'
       end
     end
 
