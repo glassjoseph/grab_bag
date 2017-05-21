@@ -2,8 +2,13 @@ require 'rails_helper'
 
 RSpec.feature "User can create a new binary" do
   context "As a logged in User" do
+    attr_reader :user, :file
+
+    before :each do
+      @user = create(:user)
+    end
+
     it "click on upload file and be redirected to correct path" do
-      user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit "/#{user.username}/home"
@@ -13,14 +18,15 @@ RSpec.feature "User can create a new binary" do
     end
 
     it "can uplaod a file" do
-      user = create(:user)
-      file = fixture_file_upload('files/test.txt', 'text/plain')
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit "/#{user.username}/home/binary_new"
 
-      post :upload, upload: file
-      response.should be_success 
+      attach_file("upload_file", Rails.root + "spec/fixtures/files/test.txt")
+      click_on "Upload Binary"
+
+      expect(current_path).to eq("/#{user.username}/home")
+      expect(page).to have_content('text.txt')
     end
   end
 end
