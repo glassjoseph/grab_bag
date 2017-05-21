@@ -1,9 +1,17 @@
-<%= form_for current_user, url: dashboard_patch_path(current_user.username) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
-  <%= f.label :email %>
-  <%= f.text_field :email%>
-  <%= f.submit "Update Profile" %>
-<% end %>
+<div class="form-group", style="width:50%;">
+  <%= form_for current_user, url: dashboard_patch_path(current_user.username) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control"  %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone %>
+      <%= f.text_field :phone, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control"%>
+    </div>
+    <%= f.submit "Update Profile", class: "btn btn-default" %>
+  <% end %>
+</div>
