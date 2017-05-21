@@ -4,52 +4,52 @@ RSpec.describe Binary do
   attr_reader :text
 
   before do
-    @text = File.read('spec/test.txt')
+    @text = 'Need an S3 url'
   end
 
   context 'Attributes' do
     it 'is invalid without a name' do
-      file = Binary.new(folder_id: 1, data: text, extension: 'txt')
+      file = Binary.new(folder_id: 1, data_url: text, extension: 'txt')
 
       expect(file).to_not be_valid
     end
 
     it 'is invalid without an extension' do
-      file = Binary.new(name: 'test', folder_id: 1, data: text)
+      file = Binary.new(name: 'test', folder_id: 1, data_url: text)
 
       expect(file).to_not be_valid
     end
 
     it 'is invalid without a folder' do
-      file = Binary.new(name: 'sam.pdf', data: text, extension: 'txt')
+      file = Binary.new(name: 'sam.pdf', data_url: text, extension: 'txt')
 
       expect(file).to_not be_valid
     end
 
-    it 'is invalid without data' do
+    it 'is invalid without a data_url' do
       file = Binary.new(name: 'sam.pdf', folder_id: 1, extension: 'txt')
 
       expect(file).to_not be_valid
     end
 
-    it 'is valid with a name, folder, data and extension' do
+    it 'is valid with a name, folder, data_url and extension' do
       user = create :user
       folder = user.home
       file = Binary.new(name: 'sam.pdf',
                         extension: '.pdf',
                         folder: folder,
-                        data: text)
+                        data_url: text)
 
       expect(file).to be_valid
     end
 
-    it 'responds to name, extension, folder and data' do
+    it 'responds to name, extension, folder and data_url' do
       file = Binary.new
 
       expect(file).to respond_to :name
       expect(file).to respond_to :extension
       expect(file).to respond_to :folder
-      expect(file).to respond_to :data
+      expect(file).to respond_to :data_url
       expect(file).to respond_to :url
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe Binary do
       user = create :user
       folder = user.home
 
-      file = Binary.new(name: 'sam.pdf', folder: folder, data: text)
+      file = Binary.new(name: 'sam.pdf', folder: folder, data_url: text)
 
       expect(file.folder).to be folder
     end
