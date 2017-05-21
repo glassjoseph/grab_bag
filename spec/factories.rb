@@ -27,9 +27,9 @@ FactoryGirl.define do
 
   factory :binary do
     sequence :name do |n|
-      "File##{n}"
+      "File#{n}"
     end
     content_type 'txt'
-    data File.new('spec/test.txt')
+    data File.new('spec/fixtures/files/test.txt')
   end
 end

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :binaries
 
   root 'landing#index', as: :landing_page
 
@@ -18,8 +17,8 @@ Rails.application.routes.draw do
     resources :folders, only: [:index, :new, :create]
   end
 
+  get '/:username/*route/binary_new', to: 'users/folders/binaries#new', as: :new_binary
   get '/:username/*route', to: 'users/folders#show', as: :folder
-
   #send url of nested folders to folders#new?
 
 end

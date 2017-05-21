@@ -1,4 +1,4 @@
-class BinariesController < ApplicationController
+class Users::Folders::BinariesController < ApplicationController
 
   def new
   end

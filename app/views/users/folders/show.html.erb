@@ -2,3 +2,4 @@
 
 
 <%= link_to "New Folder", new_users_folder_path(current_user.username) %>
+<%= link_to "Upload File", new_binary_path(current_user.username, @current_folder.route)%>
