@@ -17,8 +17,11 @@ class BinariesController < ApplicationController
   end
 
   def show
-    @binary = Binary.find(params[:id])
-    send_data @binary.data, :name => @binary.filename, :type => @binary.content_type
-  end
+    user = User.find_by(username: params[:username])
+    folder = user.owned_folders.find_by(route: params[:route])
 
+    @binary = Binary.find_by(name: params[:binary_name])
+
+    render 'users/binaries/show.html.erb'
+  end
 end
