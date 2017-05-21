@@ -12,7 +12,7 @@ private
   end
 
   def text_preview(binary)
-    File.read(binary.data_url)
+    content_tag :p, File.read(binary.data_url)
   end
 
   def no_preview

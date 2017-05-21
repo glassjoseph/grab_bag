@@ -28,19 +28,19 @@ FactoryGirl.define do
 
   factory :binary, aliases: [:text_binary] do
     sequence :name do |n|
-      "File##{n}"
+      "File#{n}"
     end
     extension 'txt'
-    data File.open('spec/test.txt')
+    data_url 'https://textfiles.com/100/914bbs.txt'
 
     factory :image_binary do
       extension 'jpg'
-      data File.open('spec/test.jpg')
+      data_url 'http://i.imgur.com/nBYOnvl.jpg'
     end
 
     factory :unknown_content_type_binary do
       extension 'ummm'
-      data "I'm a number!"
+      data_url "I'm a number!"
     end
   end
 end

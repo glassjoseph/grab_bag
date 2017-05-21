@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     resources :folders, only: [:index, :new, :create] # Are we using this index?
   end
 
-  get '/:username/*route/:binary_name', to: 'binaries#show', format: true
+  get '/:username/*route/:binary_name', to: 'users/folders/binaries#show', format: true
   get '/:username/*route', to: 'users/folders#show', as: :folder
 end
