@@ -27,7 +27,7 @@
         <div class="binaries">
           <% @current_folder.binaries.each do |binary|%>
             <tr>
-              <td> <%=binary.name%></td>
+              <td> <%=link_to(binary.name, binary.url)%></td>
               <td> <%=binary.extension%></td>
               <td> <%=binary.updated_at%></td>
               <td></td>
