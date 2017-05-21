@@ -25,7 +25,7 @@ RSpec.feature "User can view a folder" do
         expect(page).to have_content(folder2.name)
         expect(page).to have_content(folder2.updated_at)
         expect(page).to have_content(binary.name)
-        expect(page).to have_content(binary.content_type)
+        expect(page).to have_content(binary.extension)
         expect(page).to have_content(binary.updated_at)
       end
 

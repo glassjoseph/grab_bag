@@ -22,7 +22,6 @@ class Users::Folders::BinariesController < ApplicationController
     folder = user.owned_folders.find_by(route: params[:route])
 
     @binary = Binary.find_by(name: params[:binary_name])
-    byebug
 
     render 'users/binaries/show.html.erb'
   end
