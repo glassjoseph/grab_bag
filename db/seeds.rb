@@ -19,8 +19,6 @@
   data = File.new("factory_date.txt", "w+")
   data.close
 
-
-
   folder1 = Folder.create!(name: "Food", parent: user.home)
   folder2 = Folder.create!(name: "Pies", parent: folder1)
 
