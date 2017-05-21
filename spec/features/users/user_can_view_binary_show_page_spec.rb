@@ -25,8 +25,6 @@ RSpec.feature 'User can view a binary show page' do
 
       visit text.url
 
-      save_and_open_page
-
       expect(page).to have_link 'Download'
 
       within '.preview' do
