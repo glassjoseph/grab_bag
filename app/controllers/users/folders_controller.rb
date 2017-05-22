@@ -1,9 +1,9 @@
-class Users::FoldersController < ApplicationController
+class Users::FoldersController < Users::BaseController
 
   def show
     user = User.find_by(username: params[:username])
 
-    if @current_folder = Folder.find_by(route: params[:route], user_id: user.id)
+    if @current_folder = current_folder
       session[:folder_id] = @current_folder.id
     else
       render :file => "#{Rails.root}/public/404.html",  :status => 404
