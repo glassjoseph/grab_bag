@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       redirect_to sign_up_path(info: request.env['omniauth.auth'])
     else
       session[:user_id] = user.id
-      redirect_to folder_path(route: 'home', username: user.username)
+      redirect_to folders_path(route: 'home', username: user.username)
     end
   end
 end

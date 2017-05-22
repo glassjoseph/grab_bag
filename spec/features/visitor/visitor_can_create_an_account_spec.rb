@@ -11,7 +11,7 @@ RSpec.feature "Visitor can create an account" do
 
       click_on "Login with Facebook"
 
-      expect(current_path).to eq('/sign_up')
+      expect(current_path).to eq(sign_up_path)
 
       fill_in 'user[username]', with: 'samistheman'
       fill_in 'user[phone]', with: "5555555555"

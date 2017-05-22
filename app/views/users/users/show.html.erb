@@ -4,6 +4,6 @@
   <p>Email: <%= current_user.email %></p>
   <p>Username: <%= current_user.username %></p>
 
-<%= button_to "Edit Profile", dashboard_edit_path(current_user), method: :get %>
-<%= button_to "Change Password", password_edit_path(current_user), method: :get %>
+<%= button_to "Edit Profile", users_dashboard_edit_path(current_user), method: :get %>
+<%= button_to "Change Password", users_password_edit_path(current_user), method: :get %>
 </div>

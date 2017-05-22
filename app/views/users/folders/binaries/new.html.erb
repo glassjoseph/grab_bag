@@ -1,9 +1,10 @@
-<%= form_for(@binary, html: {
+<%= form_for([:users, @binary], html: {
                               class: 'directUpload',
                               data: { 'form-data' => (@s3_direct_post.fields),
                                       'url' => @s3_direct_post.url,
                                       'host' => URI.parse(@s3_direct_post.url).host }
                             }) do |f| %>
+                            <%= f.hidden_field :type, value: 'binary' %>
 <% if @binary.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>

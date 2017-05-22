@@ -8,17 +8,16 @@
               avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg')
 
 
-  data = File.new("factory_date.txt", "w+")
-  data.close
+
 
   folder1 = Folder.create!(name: "Food", parent: user.home)
   folder2 = Folder.create!(name: "Pies", parent: folder1)
 
-  binary2 = Binary.create!(name: "Pizza", folder: user.home, data: data, content_type: ".txt")
-  binary3 = Binary.create!(name: "Stromboli", folder: user.home, data: data, content_type: ".txt")
-  binary1 = Binary.create!(name: "Bratwurst", folder: user.home, data: data, content_type: ".txt")
+  binary2 = Binary.create!(name: "Pizza", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/pizza.png", extension: ".png")
+  binary3 = Binary.create!(name: "Stromboli", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/stromboli.jpg", extension: ".jpg")
+  binary1 = Binary.create!(name: "Bratwurst", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/recipe_grilled-brat.pdf", extension: ".pdf")
 
-  binary4 = Binary.create!(name: "Blackberry Pie ", folder: folder2, data: data, content_type: ".txt")
+  binary4 = Binary.create!(name: "Blackberry Pie ", folder: folder2, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/blackberry_pie.txt", extension: ".txt")
 
   user.home.folders << folder1
   user.home.binaries << [binary1, binary2, binary3]

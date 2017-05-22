@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   def current_folder
     return false unless params[:username] && params[:route]
+
     user = User.find_by(username: params[:username])
     @current_folder = user.owned_folders.find_by(route: params[:route])
   end

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Users::UsersController < ApplicationController
   def show
 
   end
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update(user_params)
-    redirect_to dashboard_path(current_user.username), success: "Profile Updated"
+    redirect_to users_dashboard_path(current_user.username), success: "Profile Updated"
   end
 
   private

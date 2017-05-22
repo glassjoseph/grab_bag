@@ -8,7 +8,7 @@ class SignUpController < ApplicationController
     user = User.from_omniauth(session[:user_info])
     user.update(user_params)
     session[:user_id] = user.id
-    redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+    redirect_to folders_path(username: user.username, route: 'home'), success: 'Account Created!'
   end
 
   private
