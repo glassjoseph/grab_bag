@@ -1,11 +1,15 @@
 class SignUpController < ApplicationController
   def new
-    @user = User.new
+    if params[:info]
+      @user = User.new(fb_id: params[:info][:uid])
+    else
+      @user = User.new
+    end
+
     session[:user_info] = params[:info]
   end
 
   def create
-
     if session[:user_info]
       user = User.from_omniauth(session[:user_info])
 
@@ -20,6 +24,8 @@ class SignUpController < ApplicationController
         session[:user_id] = user.id
         redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
       else
+        flash.now[:danger] = "Account Creation Failed"
+        @user = User.new
         render :new
       end
     end

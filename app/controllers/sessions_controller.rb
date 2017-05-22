@@ -10,5 +10,4 @@ class SessionsController < ApplicationController
       redirect_to folder_path(route: 'home', username: user.username)
     end
   end
-
 end

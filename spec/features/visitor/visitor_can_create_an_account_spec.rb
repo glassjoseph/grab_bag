@@ -40,7 +40,7 @@ RSpec.feature "Visitor can create an account" do
 
         expect(current_path).to eq folder_path(User.last.username, User.last.home.route)
 
-        within '.flash' do
+        within '.alert' do
           expect(page).to have_content 'Account Created!'
         end
       end

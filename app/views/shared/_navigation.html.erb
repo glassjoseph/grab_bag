@@ -2,19 +2,18 @@
   <a class="navbar-brand" href='<%= landing_page_path %>'>Grab Bag</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="nav navbar-nav">
-      <li>
-        <a class="nav-link" href='folders_path'>Public Folders</a>
-      </li>
+        <li><%= link_to "Public Folders", folders_path, class: 'nav-link' %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li>
+
         <% if current_user %>
-          <a class="nav-link" href="facebook_logout_path">Logout</a>
-          <%= link_to "My Profile", dashboard_path(current_user.username) %>
+          <li><%= link_to "My Profile", dashboard_path(current_user.username), class: 'nav-link' %></li>
+
+          <li><a class="nav-link" href="facebook_logout_path">Logout</a></li>
         <% else %>
-          <a class="nav-link" href="<%= facebook_login_path %>">Login With Facebook</a>
+          <li><a class="nav-link" href="<%= facebook_login_path %>">Login With Facebook</a></li>
         <% end %>
-      </li>
+
     </ul>
   </div>
 </nav>

@@ -4,7 +4,7 @@ require 'mock_auth_helper'
 feature 'log_in' do
   context 'Visitor already has an account' do
     it 'And they log in w/ FB' do
-      user = create :fb_user, fb_id: "10103559484486366"
+      user = create :user, fb_id: "10103559484486366"
 
       stub_oauth
 

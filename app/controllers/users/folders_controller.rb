@@ -10,8 +10,6 @@ class Users::FoldersController < ApplicationController
     end
   end
 
-  def index
-  end
 
   def new
     @folder = Folder.new

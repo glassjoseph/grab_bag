@@ -1,16 +1,32 @@
+<div class="form-group", style="width:50%;">
 <%= form_for @user, url: sign_up_path do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :phone_number %>
-  <%= f.text_field :phone %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone, class: "form-control" %>
+  </div>
+  <% if @user.fb_id.nil? %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+  <% end %>
 
-  <%= f.submit 'Create Account', class: 'btn' %>
+  <%= f.submit 'Create Account', class: "btn btn-default" %>
 <% end %>
+</div

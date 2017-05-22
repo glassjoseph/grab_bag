@@ -1,6 +1,14 @@
 class User < ApplicationRecord
   has_secure_password validations: false
 
+  with_options if: ->(u){u.fb_id.nil?} do |user|
+    user.validate do |record|
+      record.errors.add(:password, :blank) unless record.password_digest.present?
+    end
+    user.validates_length_of :password, maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
+    user.validates_confirmation_of :password, allow_blank: true
+  end
+
   validates :username, presence: true
   validates :name, presence: true
   validates :status, presence: true
