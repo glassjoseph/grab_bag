@@ -19,7 +19,11 @@ RSpec.feature 'A user can leave a comment on a file' do
       click_on('Post Comment')
 
       expect(current_path).to eq(binary.url)
-      expect(page).to have_content('This is a comment.')
+      
+      within('.comments') do
+        expect(page).to have_content('This is a comment.')
+        expect(page).to have_content(user.name)
+      end
     end
   end
 
@@ -44,7 +48,11 @@ RSpec.feature 'A user can leave a comment on a file' do
       click_on('Post Comment')
 
       expect(current_path).to eq(binary.url)
-      expect(page).to have_content('This is a comment.')
+
+      within('.comments') do
+        expect(page).to have_content('This is a comment.')
+        expect(page).to have_content(user.name)
+      end
     end
   end
 
