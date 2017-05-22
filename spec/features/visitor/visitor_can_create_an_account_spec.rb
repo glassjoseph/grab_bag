@@ -3,15 +3,14 @@ require 'mock_auth_helper'
 
 RSpec.feature "Visitor can create an account" do
   context "As a visitor not in database" do
-
     it "visitor can create an account" do
       stub_oauth
 
-      visit '/'
+      visit landing_page_path
 
       click_on "Login with Facebook"
 
-      expect(current_path).to eq('/sign_up')
+      expect(current_path).to eq(sign_up_path)
 
       fill_in 'user[username]', with: 'samistheman'
       fill_in 'user[phone]', with: "5555555555"

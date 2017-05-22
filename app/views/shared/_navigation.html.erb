@@ -7,7 +7,7 @@
     <ul class="nav navbar-nav navbar-right">
 
         <% if current_user %>
-          <li><%= link_to "My Profile", dashboard_path(current_user.username), class: 'nav-link' %></li>
+          <li><%= link_to "My Profile", users_dashboard_path(current_user.username), class: 'nav-link' %></li>
 
           <li><a class="nav-link" href="facebook_logout_path">Logout</a></li>
         <% else %>
