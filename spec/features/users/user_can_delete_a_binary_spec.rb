@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature do
   context "as a logged in user" do
-    it "can delete my own file" do
+    it "can delete my own file from a folder show page" do
       user = create(:user_with_folders)
       binary = user.home.binaries.first
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
