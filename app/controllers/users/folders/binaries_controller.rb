@@ -9,7 +9,7 @@ class Users::Folders::BinariesController < ApplicationController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
-    byebug
+
     binary_name = get_name
     if binary.update(name: binary_name.first,
                      extension: binary_name.last,
