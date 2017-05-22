@@ -9,8 +9,9 @@ class Users::Folders::BinariesController < ApplicationController
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
     binary = Binary.new(binary_params)
-    if binary.update(name: params["binary"]["data_url"].original_filename.split(".")[0],
-                     extension: params["binary"]["data_url"].original_filename.split(".")[1],
+    binary_name = get_name
+    if binary.update(name: binary_name.first,
+                     extension: binary_name.last,
                      folder_id: folder.id
       )
       redirect_to binary.url, success: "File created"
@@ -27,7 +28,11 @@ class Users::Folders::BinariesController < ApplicationController
     render 'users/folders/binaries/show.html.erb'
   end
 
-  private
+private
+
+  def get_name
+    binary_params[:data_url].split('/').last.split('.')
+  end
 
   def binary_params
     params.require(:binary).permit(:data_url)
@@ -36,5 +41,4 @@ class Users::Folders::BinariesController < ApplicationController
   def set_s3_direct_post
    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   end
-
 end
