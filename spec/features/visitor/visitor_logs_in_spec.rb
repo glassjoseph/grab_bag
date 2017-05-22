@@ -19,5 +19,20 @@ feature 'log_in' do
       expect(page).to have_link "Logout"
       expect(page).to_not have_link "Login"
     end
+
+    it 'And they log in w/o FB' do
+      user = create :regular_user
+
+      visit '/'
+      fill_in 'user[username]', with: user.username
+      fill_in 'user[password]', with: 'banana'
+
+      click_on 'Login'
+
+      expect(current_path).to eq("/#{user.username}/home")
+      expect(page).to have_content user.username
+      expect(page).to have_link "Logout"
+      expect(page).to_not have_link "Login"
+    end
   end
 end

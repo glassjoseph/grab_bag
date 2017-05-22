@@ -18,6 +18,13 @@ FactoryGirl.define do
     token ENV['facebook_token']
     avatar_url 'https://socwork.wisc.edu/files/joe-glass-lg.jpg'
 
+    factory :regular_user do
+      token nil
+      fb_id nil
+      password 'banana'
+      password_confirmation 'banana'
+    end
+
     factory :user_with_folders do
       after(:create) do |user|
         3.times do
