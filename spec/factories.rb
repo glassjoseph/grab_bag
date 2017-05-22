@@ -16,6 +16,16 @@ FactoryGirl.define do
     phone '5555555555'
     token ENV['facebook_token']
     avatar_url 'https://socwork.wisc.edu/files/joe-glass-lg.jpg'
+
+    factory :user_with_folders do
+      after(:create) do |user|
+        3.times do
+          user.home.folders << create(:folder, parent: user.home)
+
+          user.home.binaries << create(:binary, folder: user.home)
+        end
+      end
+    end
   end
 
   factory :folder do
@@ -31,9 +41,10 @@ FactoryGirl.define do
       "File#{n}"
     end
     extension 'txt'
-    data_url 'https://textfiles.com/100/914bbs.txt'
+    data_url 'http://textfiles.com/100/914bbs.txt'
 
     factory :image_binary do
+      name 'imgur'
       extension 'jpg'
       data_url 'http://i.imgur.com/nBYOnvl.jpg'
     end
