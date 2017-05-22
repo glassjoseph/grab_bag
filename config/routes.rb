@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/:username/*route/binary_new', to: 'users/folders/binaries#new', as: :new_binary
   get '/:username/*route/:binary_name', to: 'users/folders/binaries#show', format: true
+  delete '/:username/*route/:binary_name', to: 'users/folders/binaries#destroy', format: true, as: :binary
   post '/:username/*route', to: 'users/folders/binaries#create', as: :binaries
   #send url of nested folders to folders#new?
 
