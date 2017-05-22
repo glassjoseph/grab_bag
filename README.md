@@ -24,19 +24,29 @@ A visual representation of the schema is here:
 ### Features
 
 User
+
  * A user can authenticate via Facebook or manually
  * She must provide a username and phone number for Two Factor Authentication purposes
  * A user can view and edit her details
  * A user can be an admin, at which point she can deactivate users, delete folders, files, and comments
+
+
 Folder
+
  * Every user is created with a home folder
  * When a new folder is created, its entire path is stored in the database
  * Folders can be made public (or private, if already public)
  * Folders can be shared by entering another user's username
+
+
 File (in the schema, Binary)
+
  * Files can be uploaded or downloaded if they belong to that user, or if they are in a folder shared with that user
  * Files can be previewed on the page
+
+
 Comment
+
  * A user can leave comments on any file that is owned or shared with her
 
 ### Design
