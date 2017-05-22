@@ -2,17 +2,15 @@ class SignUpController < ApplicationController
   def new
     if params[:info]
       @user = User.new(fb_id: params[:info][:uid])
+      session[:user_info] = params[:info]
     else
       @user = User.new
     end
-
-    session[:user_info] = params[:info]
   end
 
   def create
     if session[:user_info]
       user = User.from_omniauth(session[:user_info])
-
       session.delete(:user_info)
       user.update(facebook_user_params)
       session[:user_id] = user.id

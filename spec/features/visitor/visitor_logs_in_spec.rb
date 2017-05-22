@@ -11,7 +11,7 @@ feature 'log_in' do
       visit '/'
 
       within '.welcome' do
-        click_on 'Login'
+        click_on 'Login with Facebook'
       end
 
       expect(current_path).to eq("/#{user.username}/home")
