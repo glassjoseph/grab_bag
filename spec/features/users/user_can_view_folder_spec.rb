@@ -18,9 +18,8 @@ RSpec.feature "User can view a folder" do
 
       click_on "Pies"
 
-      # I expect to be on the folder show page
       expect(current_path).to eq("/#{user.username}/home/pies")
-      # I expect to see the contents of the folder
+
       within (".folder_contents") do
         expect(page).to have_content(folder2.name)
         expect(page).to have_content(folder2.updated_at)
@@ -33,9 +32,5 @@ RSpec.feature "User can view a folder" do
       expect(page).to have_content("New Folder")
       expect(page).to have_content("Share")
     end
-    # I expect to be able to sort by name (Extension?)
-    # I expect to be able to sort by modified date (Extension?)
-    # expect(page).to have_content("Sort By Name")
-    # expect(page).to have_content("Sort By Date")
   end
 end
