@@ -11,7 +11,7 @@ class Folder < ApplicationRecord
   has_many :child_folders
   has_many :shared_folders
   has_many :users_shared_with, through: :shared_folders
-  has_many :folders, class_name: 'Folder', foreign_key: 'folder_id'
+  has_many :folders, class_name: 'Folder', foreign_key: 'folder_id', dependent: :destroy
   belongs_to :parent, class_name: 'Folder', foreign_key: 'folder_id'
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
 
