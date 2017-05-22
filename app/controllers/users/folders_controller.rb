@@ -28,6 +28,12 @@ class Users::FoldersController < ApplicationController
     end
   end
 
+  def destroy
+    folder = Folder.find(params[:id])
+    parent = folder.parent
+    folder.destroy
+    redirect_to parent.url, warning: "#{folder.name} Successfully Deleted!"
+  end
 
   private
 
