@@ -32,6 +32,7 @@
               <td> <%=binary.updated_at%></td>
               <td></td>
               <td> <a href='<%= binary.data_url %>' type="button" class="btn btn-primary"> Download </a>  </td>
+              <td> <%= link_to 'Delete', binary_path(binary.folder.owner, binary.url, binary.name, binary.extension, id: binary.id), data: {confirm: 'Are you sure?'}, method: :delete %>  </td>
             </tr>
           <% end %>
           <br>
@@ -41,4 +42,3 @@
   <% else %>
     <h3> This folder is empty. Try uploading a file! </h3>
   <% end %>
-
