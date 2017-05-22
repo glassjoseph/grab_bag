@@ -31,7 +31,7 @@
               <td> <%=binary.extension%></td>
               <td> <%=binary.updated_at%></td>
               <td></td>
-              <td> <button type="button" class="btn btn-primary"> Download </button>  </td>
+              <td> <a href='<%= binary.data_url %>' type="button" class="btn btn-primary"> Download </a>  </td>
             </tr>
           <% end %>
           <br>
