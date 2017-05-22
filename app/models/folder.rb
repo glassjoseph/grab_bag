@@ -25,7 +25,7 @@ class Folder < ApplicationRecord
     '/' + owner.username + '/' + route
   end
 
-  private
+private
 
   def get_user
     self.user_id = parent.user_id if parent
