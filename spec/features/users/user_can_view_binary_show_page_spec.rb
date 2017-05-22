@@ -24,7 +24,7 @@ RSpec.feature 'User can view a binary show page' do
       text = create :text_binary, folder: folder
 
       visit text.url
-      byebug
+      
       expect(page).to have_link 'Download'
 
       within '.preview' do
