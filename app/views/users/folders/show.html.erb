@@ -20,6 +20,7 @@
               <td> <%=folder.updated_at%></td>
               <td> <%=folder.permission%></td>
               <td> <button type="button" class="btn btn-primary"> Share </button>  </td>
+              <td> <%= link_to 'Delete', users_folder_path(folder.owner, folder.id), data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
             </tr>
           <% end %>
           <br>
