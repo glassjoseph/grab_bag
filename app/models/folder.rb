@@ -7,7 +7,7 @@ class Folder < ApplicationRecord
   before_validation :get_user
   before_validation :get_route
 
-  has_many :binaries
+  has_many :binaries, dependent: :destroy
   has_many :child_folders
   has_many :shared_folders
   has_many :users_shared_with, through: :shared_folders
