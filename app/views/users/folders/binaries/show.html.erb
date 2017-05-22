@@ -1,5 +1,5 @@
 <h1>File: <%= @binary.name %></h1>
-<%= link_to 'Download' %>
+<%= link_to 'Download', @binary.data_url %>
 
 <div class="preview">
 <%= render_preview(@binary) %>
