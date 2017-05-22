@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :folders, only: [:index]
 
   namespace :users, path: ":username" do
-    resources :folders, only: [:new, :create]
+    resources :folders, only: [:new, :create, :destroy]
   end
 
   get '/:username/*route/binary_new', to: 'users/folders/binaries#new', as: :new_binary
