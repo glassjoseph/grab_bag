@@ -25,9 +25,9 @@ RSpec.feature "Visitor can create an account" do
       scenario 'Visitor clicks create account from root' do
         visit landing_page_path
 
-        click_on 'Create Account'
+        click_on 'Create an Account'
 
-        expect(current_path).to sign_up_path
+        expect(current_path).to eq(sign_up_path)
 
         fill_in 'user[username]', with: 'samiam'
         fill_in 'user[password]', with: 'samiam'
@@ -38,7 +38,7 @@ RSpec.feature "Visitor can create an account" do
 
         click_on 'Create Account'
 
-        expect(current_path).to eq folder_path(User.last.folders.first, User.last.home)
+        expect(current_path).to eq folder_path(User.last.username, User.last.home.route)
 
         within '.flash' do
           expect(page).to have_content 'Account Created!'
