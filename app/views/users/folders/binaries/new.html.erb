@@ -1,4 +1,19 @@
-<%= form_tag binaries_path, method: :post, :multipart => true do %>
-  <%= file_field_tag 'upload_file' %>
-  <%= submit_tag "Upload Binary" %>
-<% end %>
+<%= form_for(@binary, html: { class: 'directUpload',
+        data: { 'form-data' => (@s3_direct_post.fields),
+                'url' => @s3_direct_post.url,
+                'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+        <div class="field">
+          <%= f.label :data_url %><br>
+          <%= f.file_field :data_url %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+        <% end %>
+
+
+
+<!-- <#%= form_tag binaries_path, method: :post, :multipart => true do %>
+  <#%= file_field_tag 'upload_file' %>
+  <#%= submit_tag "Upload Binary" %>
+<#% end %> -->
