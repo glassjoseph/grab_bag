@@ -55,11 +55,4 @@ FactoryGirl.define do
     end
   end
 
-  # factory :comment do
-  #   sequence :text do |n|
-  #     "Comment#{n}"
-  #   end
-  #   user
-  #   binary
-  # end
 end
