@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
 
+  resources :sessions, only: [:create]
+
   get '/sign_up', to: 'sign_up#new'
   post '/sign_up', to: 'sign_up#create'
+  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   namespace :users, path: ":username" do
     get '/dashboard', to: 'users#show', as: :dashboard

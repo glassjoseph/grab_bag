@@ -9,7 +9,7 @@
         <% if current_user %>
           <li><%= link_to "My Profile", users_dashboard_path(current_user.username), class: 'nav-link' %></li>
 
-          <li><a class="nav-link" href="facebook_logout_path">Logout</a></li>
+          <li><%= link_to "Logout", signout_path, class: 'nav-link'%></li>
         <% else %>
           <li><a class="nav-link" href="<%= facebook_login_path %>">Login With Facebook</a></li>
         <% end %>

@@ -3,7 +3,7 @@ require 'mock_auth_helper'
 
 RSpec.feature "Visitor can create an account" do
   context "As a visitor not in database" do
-    it "visitor can create an account" do
+    it "visitor can create an account with FB" do
       stub_oauth
 
       visit landing_page_path
@@ -19,6 +19,31 @@ RSpec.feature "Visitor can create an account" do
 
       expect(current_path).to eq("/samistheman/home")
       expect(page).to have_content("Account Created!")
+    end
+
+    context 'A visitor tries to create an account with valid details' do
+      scenario 'Visitor clicks create account from root' do
+        visit landing_page_path
+
+        click_on 'Create an Account'
+
+        expect(current_path).to eq(sign_up_path)
+
+        fill_in 'user[username]', with: 'samiam'
+        fill_in 'user[password]', with: 'samiam'
+        fill_in 'user[password_confirmation]', with: 'samiam'
+        fill_in 'user[name]', with: 'Sam L'
+        fill_in 'user[email]', with: 'sam@sam.com'
+        fill_in 'user[phone]', with: '55555555555'
+
+        click_on 'Create Account'
+
+        expect(current_path).to eq User.last.home.url
+
+        within '.alert' do
+          expect(page).to have_content 'Account Created!'
+        end
+      end
     end
   end
 end

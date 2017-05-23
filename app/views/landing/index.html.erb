@@ -1,5 +1,19 @@
 <div class="welcome">
   <h1>Welcome to Grab Bag!</h1>
+  <div class="form-group", style="width:50%;">
+  <%= form_for @user, url: sessions_path do |f| %>
+    <div class="form-group">
+      <%= f.label :username %>
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <%= f.submit 'Login', class: "btn btn-default" %>
+  <% end %>
 
   <%= link_to "Login with Facebook", facebook_login_path %>
+  <br>
+  <%= link_to "Create an Account", sign_up_path %>
 </div>
