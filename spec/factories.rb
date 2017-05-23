@@ -54,4 +54,12 @@ FactoryGirl.define do
       data_url "I'm a number!"
     end
   end
+
+  # factory :comment do
+  #   sequence :text do |n|
+  #     "Comment#{n}"
+  #   end
+  #   user
+  #   binary
+  # end
 end
