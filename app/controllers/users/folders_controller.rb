@@ -1,5 +1,4 @@
 class Users::FoldersController < Users::BaseController
-
   def show
     user = User.find_by(username: params[:username])
 
@@ -10,16 +9,17 @@ class Users::FoldersController < Users::BaseController
     end
   end
 
-
   def new
     @folder = Folder.new
   end
 
   def create
-    parent_folder = Folder.find(session[:folder_id])
-    session.delete(:folder_id)
+    byebug
+    user = User.find_by(username: params[:username])
+    parent_folder = user.owned_folders.find_by(route: params[:route])
 
     folder = Folder.new(folder_params)
+
     if folder.update(user_id: parent_folder.owner.id,
                      folder_id: parent_folder.id)
       redirect_to folder.url, success: "Folder Successfully Created!"
@@ -28,11 +28,9 @@ class Users::FoldersController < Users::BaseController
     end
   end
 
-
-  private
+private
 
   def folder_params
     params.require(:folder).permit(:name, :permission)
   end
-
 end
