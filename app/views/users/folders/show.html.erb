@@ -2,7 +2,7 @@
 <h2><%= @current_folder.name %> </h2>
 
 <%= link_to "New Folder", new_users_folder_path(current_user.username), class: "btn btn-success" %>
-<%= link_to "Upload File", new_users_folder_path(current_user.username), class: "btn btn-success" %>
+<%= link_to "Upload File", new_binary_path(current_user.username, @current_folder.route), class: "btn btn-success"%>
 
   <% unless @current_folder.children.empty? %>
     <div class="folder_contents">
@@ -31,7 +31,7 @@
               <td> <%=binary.extension%></td>
               <td> <%=binary.updated_at%></td>
               <td></td>
-              <td> <button type="button" class="btn btn-primary"> Download </button>  </td>
+              <td> <a href='<%= binary.data_url %>' type="button" class="btn btn-primary"> Download </a>  </td>
             </tr>
           <% end %>
           <br>
@@ -41,8 +41,4 @@
   <% else %>
     <h3> This folder is empty. Try uploading a file! </h3>
   <% end %>
-<!-- # pass in username/binary.url
-<%#= link_to "Upload"%> "username/folders/new" -->
 
-<%#= link_to "Sort By Name" %>
-<%#= link_to "Sort By Date" %>

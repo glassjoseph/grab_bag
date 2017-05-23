@@ -1,17 +1,21 @@
 class Users::Folders::BinariesController < ApplicationController
+  before_action :set_s3_direct_post, only: [:new, :create]
+
   def new
+    @binary = Binary.new
   end
 
   def create
-    return if params[:binary].blank?
+    user = User.find_by(username: params[:username])
+    folder = user.owned_folders.find_by(route: params[:route])
+    binary = Binary.new(binary_params)
 
-    @user = current_user
-    @folder = @user.home
-    @binary = @folder.binaries.new
-    @binary.uploaded_file = params[:binary]
-
-    if @binary.save!
-      redirect_to landing_page_path, success: "Profile Updated"
+    binary_name = get_name
+    if binary.update(name: binary_name.first,
+                     extension: binary_name.last,
+                     folder_id: folder.id
+      )
+      redirect_to binary.url, success: "File created"
     else
       render :new, error: "There was a problem submitting your attachment."
     end
@@ -24,6 +28,20 @@ class Users::Folders::BinariesController < ApplicationController
     @binary = Binary.find_by(name: params[:binary_name])
     @comment = Comment.new
 
-    render 'users/binaries/show.html.erb'
+    render 'users/folders/binaries/show.html.erb'
+  end
+
+private
+
+  def get_name
+    binary_params[:data_url].split('/').last.split('.')
+  end
+
+  def binary_params
+    params.require(:binary).permit(:data_url)
+  end
+
+  def set_s3_direct_post
+   @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   end
 end

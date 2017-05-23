@@ -4,7 +4,7 @@ RSpec.feature "User can view folder share page" do
   context "As a logged in User" do
     xit "User can view folder's share options" do
       user = create(:user_with_folders)
-      folder = user.home.folders.last
+      folder = user.folders.last
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit "/#{user.username}/#{folder.route}"
