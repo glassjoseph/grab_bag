@@ -1,17 +1,18 @@
 10.times do |n|
-  user = User.create(name: Faker::LordOfTheRings.character,
-              username: "user#{n}",
-              email: Faker::Internet.email,
-              phone: '5555555555',
-              status: 'active',
-              token: Faker::Internet.password,
-              avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg')
+  User.new(name: Faker::LordOfTheRings.character,
+          username: "user#{n}",
+          email: Faker::Internet.email,
+          phone: '5555555555',
+          status: 'active',
+          token: Faker::Internet.password,
+          avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg').save(validate: false)
+
+  user = User.last
+  user.owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
 
 
-
-
-  folder1 = Folder.create!(name: "Food", parent: user.home)
-  folder2 = Folder.create!(name: "Pies", parent: folder1)
+  folder1 = Folder.create!(name: "Food", parent: user.home, route:"#{user.home.route}/food")
+  folder2 = Folder.create!(name: "Pies", parent: folder1 )
 
   binary2 = Binary.create!(name: "Pizza", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/pizza.png", extension: ".png")
   binary3 = Binary.create!(name: "Stromboli", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/stromboli.jpg", extension: ".jpg")
@@ -26,4 +27,3 @@
 
   n += 1
 end
-#test pivotal
