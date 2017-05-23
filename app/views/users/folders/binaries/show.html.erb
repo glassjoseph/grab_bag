@@ -7,3 +7,10 @@
 </div>
 
 <%= render partial: 'shared/comments' %>
+
+<div class="comments">
+  <% @binary.comments.each do |comment| %>
+    <p><%= comment.user.username %></p>
+    <p><%= comment.text %></p>
+  <% end %>
+</div>

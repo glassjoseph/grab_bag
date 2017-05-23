@@ -4,6 +4,7 @@ class Binary < ApplicationRecord
   validates :data_url, presence: true
 
   belongs_to :folder
+  has_many :comments
 
   def url
     folder.url + '/' + name + '.' + extension

@@ -63,4 +63,5 @@ FactoryGirl.define do
       data_url "I'm a number!"
     end
   end
+
 end

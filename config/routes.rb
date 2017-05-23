@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     post '/*route', to: 'folders#create', as: :folders, constraints: { parameters: /folder/ }
     delete '/*route', to: 'folders#destroy', as: :folder_delete
+    post '/*route/:binary_name', to: 'folders/binaries/comments#create', as: :binary_comments, format: true
 
     get '/*route', to: 'folders#show', as: :folder
   end
