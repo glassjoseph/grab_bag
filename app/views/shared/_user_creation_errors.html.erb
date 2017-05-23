@@ -1,5 +1,5 @@
 <% if @user.errors.any? %>
-  <div id="error_explanation" class='alert alert-danger'>
+  <div id="error_explanation" class='alert alert-warning'>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>

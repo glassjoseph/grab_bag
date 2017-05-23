@@ -9,14 +9,14 @@ class User < ApplicationRecord
     user.validates_confirmation_of :password, allow_blank: true
   end
 
-  validates_format_of :username, with: /\A[a-zA-Z]+([a-zA-Z]|\d)*\Z/, message: 'can only contain letters and numbers'
   validates :username, presence: true
+  validate :check_username_format
   validates :name, presence: true
   validates :status, presence: true
   validates :email, presence: true
-  validates :email, format: {with: /\A([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})\z/, message: "Address Invalid Format"}
+  validate :check_email_format
   validates :phone, presence: true
-  validates :phone, format: { with: /\d{3}[-\s]?\d{3}[-\s]?\d{4}/, message: "Number Invalid Format" }
+  validate :check_phone_format
   validates_uniqueness_of :username, case_sensitive: false
 
   enum status: %w(active inactive)
@@ -42,6 +42,20 @@ class User < ApplicationRecord
   end
 
 private
+  def check_email_format
+    return if errors.key?(:email)
+    validates_format_of :email, with: /\A([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})\z/, message: "Address Invalid Format"
+  end
+
+  def check_phone_format
+    return if errors.key?(:phone)
+    validates_format_of :phone, with: /\d{3}[-\s]?\d{3}[-\s]?\d{4}/, message: "Number Invalid Format"
+  end
+
+  def check_username_format
+    return if errors.key?(:username)
+    validates_format_of :username, with: /\A[a-zA-Z]+([a-zA-Z]|\d)*\Z/, message: 'can only contain letters and numbers'
+  end
 
   def make_home
     owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
