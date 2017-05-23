@@ -9,7 +9,8 @@ RSpec.feature "User can create a new folder" do
       visit "/#{user.username}/home"
       click_on "New Folder"
 
-      expect(current_path).to eq("/#{user.username}/folders/new")
+      expect(current_path).to eq(users_new_folder_path(user.username, user.home.route))
+
       fill_in "folder[name]", with: "Sweet jams"
       choose "folder_permission_personal"
       click_on "Create"
@@ -18,7 +19,7 @@ RSpec.feature "User can create a new folder" do
       expect(Folder.last.personal?).to be true
 
       # use parameterize for folder-path creation.
-      expect(current_path).to eq("/#{user.username}/home/sweet-jams")
+      expect(current_path).to eq(Folder.last.url)
     end
   end
 end
