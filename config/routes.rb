@@ -17,12 +17,12 @@ Rails.application.routes.draw do
     get '/dashboard/change_password', to: 'passwords#edit', as: :password_edit
 
     get '/*route/folder_new', to: 'folders#new', as: :new_folder
+    get '/*route/:binary_name', to: 'folders/binaries#show', as: :binary, format: true
     get '/*route/binary_new', to: 'folders/binaries#new', as: :new_binary
 
     post '/*route', to: 'folders/binaries#create', as: :binaries, constraints: { parameters: /binary/ }
     post '/*route', to: 'folders#create', as: :folders, constraints: { parameters: /folder/ }
 
-    get '/*route/:binary_name', to: 'folders/binaries#show', as: :binary, format: true
     get '/*route', to: 'folders#show', as: :folder
   end
 
