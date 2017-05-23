@@ -22,6 +22,7 @@ class Users::Folders::BinariesController < ApplicationController
     folder = user.owned_folders.find_by(route: params[:route])
 
     @binary = Binary.find_by(name: params[:binary_name])
+    @comment = Comment.new
 
     render 'users/binaries/show.html.erb'
   end

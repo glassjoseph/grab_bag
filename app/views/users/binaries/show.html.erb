@@ -5,4 +5,11 @@
 <%= render_preview(@binary) %>
 </div>
 
-<%= render partial: 'shared/comments' %>
+<%= render partial: 'shared/comments_form' %>
+
+<div class="comments">
+  <% @binary.comments.each do |comment| %>
+    <p><%= comment.user.username %></p>
+    <p><%= comment.text %></p>
+  <% end %>
+</div>

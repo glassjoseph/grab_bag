@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :shared_folders
   has_many :folders_shared_with, through: :shared_folders, source: :folder
   has_many :owned_folders, class_name: "Folder", foreign_key: "user_id"
+  has_many :comments
 
   after_create :make_home
 
