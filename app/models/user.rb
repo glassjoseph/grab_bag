@@ -14,7 +14,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :status, presence: true
   validates :email, presence: true
+  validates :email, format: {with: /\A([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})\z/, message: "Address Invalid Format"}
   validates :phone, presence: true
+  validates :phone, format: { with: /\d{3}[-\s]?\d{3}[-\s]?\d{4}/, message: "Number Invalid Format" }
   validates_uniqueness_of :username, case_sensitive: false
 
   enum status: %w(active inactive)
