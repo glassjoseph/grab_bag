@@ -6,9 +6,9 @@ RSpec.feature "User edits their profile page" do
       user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit "/#{user.username}/dashboard"
-      click_on "Edit Profile"
+      visit users_dashboard_path(user.username)
 
+      click_on "Edit Profile"
 
       expect(page).to have_selector("input")
 
