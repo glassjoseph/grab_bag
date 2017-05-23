@@ -1,26 +1,9 @@
 class SessionsController < ApplicationController
   def create
-    # Holy ugly action batman
     if params[:user] && params[:user][:password]
-      user = User.find_by(username: params[:user][:username])
-      if user && user.fb_id.nil? && user.authenticate(params[:user][:password])
-        session[:user_id] = user.id
-        flash[:success] = 'Login successful'
-
-        redirect_to folder_path(route: 'home', username: user.username)
-      else
-        flash[:danger] = 'Login failed'
-
-        redirect_to landing_page_path
-      end
+      regular_user
     else
-      user = User.find_by(fb_id: request.env['omniauth.auth']['uid'])
-      if user.nil?
-        redirect_to sign_up_path(info: request.env['omniauth.auth'])
-      else
-        session[:user_id] = user.id
-        redirect_to folder_path(route: 'home', username: user.username)
-      end
+      facebook_user
     end
   end
 
@@ -28,4 +11,47 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to landing_page_path
   end
+
+  private
+
+  def facebook_user
+    if user = User.find_by(fb_id: request.env['omniauth.auth']['uid'])
+      session[:user_id] = user.id
+      redirect_to folder_path(route: 'home', username: user.username)
+    else
+      redirect_to sign_up_path(info: request.env['omniauth.auth'])
+    end
+  end
+
+  def regular_user
+    if user = User.find_by(username: params[:user][:username])
+      user_exists(user)
+    else
+      flash[:danger] = 'Invalid Username'
+      redirect_to landing_page_path
+    end
+  end
+
+  def user_exists(user)
+    if user.fb_id.nil?
+      regular_user_exists(user)
+    else
+      flash[:danger] = 'Invalid Username'
+      redirect_to landing_page_path
+    end
+  end
+
+  def regular_user_exists(user)
+    if user.authenticate(params[:user][:password])
+      session[:user_id] = user.id
+      flash[:success] = 'Login successful'
+
+      redirect_to folder_path(route: 'home', username: user.username)
+    else
+      flash[:danger] = 'Wrong Password'
+
+      redirect_to landing_page_path
+    end
+  end
+
 end

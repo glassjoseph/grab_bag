@@ -9,6 +9,7 @@ class User < ApplicationRecord
     user.validates_confirmation_of :password, allow_blank: true
   end
 
+  validates_format_of :username, with: /\A[a-zA-Z]+([a-zA-Z]|\d)*\Z/, message: 'can only contain letters and numbers'
   validates :username, presence: true
   validates :name, presence: true
   validates :status, presence: true

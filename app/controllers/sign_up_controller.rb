@@ -10,22 +10,9 @@ class SignUpController < ApplicationController
 
   def create
     if session[:user_info]
-      user = User.from_omniauth(session[:user_info])
-      session.delete(:user_info)
-      user.update(facebook_user_params)
-      session[:user_id] = user.id
-      redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+      create_facebook_user
     else
-      user = User.new(user_params)
-      if user.save
-        flash[:success] = "Successfully created new user!"
-        session[:user_id] = user.id
-        redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
-      else
-        flash.now[:danger] = "Account Creation Failed"
-        @user = User.new
-        render :new
-      end
+      create_regular_user
     end
   end
 
@@ -37,5 +24,27 @@ class SignUpController < ApplicationController
 
   def facebook_user_params
     params.require(:user).permit(:username, :phone)
+  end
+
+  def create_facebook_user
+    user = User.from_omniauth(session[:user_info])
+    session.delete(:user_info)
+    user.update(facebook_user_params)
+    session[:user_id] = user.id
+    redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+  end
+
+  def create_regular_user
+    user = User.new(user_params)
+    if user.save
+      flash[:success] = "Successfully created new user!"
+      session[:user_id] = user.id
+      redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+    else
+      flash.now[:danger] = "Account Creation Failed"
+      @user = user
+
+      render :new
+    end
   end
 end
