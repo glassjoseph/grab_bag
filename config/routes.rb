@@ -20,11 +20,9 @@ Rails.application.routes.draw do
     get '/*route/:binary_name', to: 'folders/binaries#show', as: :binary, format: true
     get '/*route/binary_new', to: 'folders/binaries#new', as: :new_binary
 
-
-    post '/*route', to: 'folders/binaries#create', as: :binaries, constraints: { commit: 'Create Binary' }
-    post '/*route', to: 'folders#create', as: :folders, constraints: { commit: 'Create Folder' }
+    post '/*route', to: 'folders/binaries#create', as: :binaries, constraints: { parameters: /binary/ }
+    post '/*route', to: 'folders#create', as: :folders, constraints: { parameters: /folder/ }
     get '/*route', to: 'folders#show', as: :folder
-
   end
 
   resources :folders, only: :index

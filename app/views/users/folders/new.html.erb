@@ -2,6 +2,7 @@
 
 <div class="form-group", style="width:50%;">
   <%= form_for @folder, url: "/#{current_user.username}/folders" do |f| %>
+  <%= f.hidden_field :type, value: 'folder' %>
     <div class="form-group">
     <%= f.label :name  %>
     <%= f.text_field :name, class: "form-control"  %>

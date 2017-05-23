@@ -14,7 +14,6 @@ class Users::FoldersController < Users::BaseController
   end
 
   def create
-    byebug
     user = User.find_by(username: params[:username])
     parent_folder = user.owned_folders.find_by(route: params[:route])
 

@@ -36,6 +36,7 @@ private
   end
 
   def binary_params
+    byebug
     params.require(:binary).permit(:data_url)
   end
 
