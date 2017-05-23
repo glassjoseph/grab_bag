@@ -1,3 +1,3 @@
 <% @folders.each do |folder| %>
-  <%= link_to folder.name, folders_path(current_user.username, folder.route) %>
+  <%= link_to folder.name, users_folder_path(current_user.username, folder.route) %>
 <% end %>
