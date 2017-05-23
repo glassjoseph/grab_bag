@@ -10,7 +10,7 @@ RSpec.feature 'User can view a binary show page' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     end
 
-    xscenario 'User clicks a binary from a folder view' do
+    scenario 'User clicks a binary from a folder view' do
       binary = create :binary, folder: folder
 
       visit folder.url

@@ -62,13 +62,14 @@ ActiveRecord::Schema.define(version: 20170523003445) do
     t.string   "username"
     t.string   "name"
     t.string   "fb_id"
-    t.integer  "status",     default: 0
+    t.integer  "status",          default: 0
     t.string   "email"
     t.string   "phone"
     t.string   "token"
     t.string   "avatar_url"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "password_digest"
   end
 
   add_foreign_key "binaries", "folders"
