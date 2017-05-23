@@ -27,6 +27,14 @@ class Users::FoldersController < Users::BaseController
     end
   end
 
+  def destroy
+    user = User.find_by(username: params[:username])
+    folder = user.owned_folders.find_by(route: params[:route])
+    parent = folder.parent
+    folder.destroy
+    redirect_to parent.url, warning: "#{folder.name} Successfully Deleted!"
+  end
+
 private
 
   def folder_params

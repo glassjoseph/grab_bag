@@ -20,6 +20,7 @@
               <td> <%=folder.updated_at%></td>
               <td> <%=folder.permission%></td>
               <td> <button type="button" class="btn btn-primary"> Share </button>  </td>
+              <td> <%= link_to 'Delete', folder.url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
             </tr>
           <% end %>
           <br>
@@ -32,6 +33,7 @@
               <td> <%=binary.updated_at%></td>
               <td></td>
               <td> <a href='<%= binary.data_url %>' type="button" class="btn btn-primary"> Download </a>  </td>
+              <td> <%= link_to 'Delete', binary.url, data: {confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-danger' %>  </td>
             </tr>
           <% end %>
           <br>

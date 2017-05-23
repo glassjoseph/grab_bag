@@ -29,6 +29,14 @@ class Users::Folders::BinariesController < Users::BaseController
     render 'users/folders/binaries/show.html.erb'
   end
 
+  def destroy
+    user = User.find_by(username: params[:username])
+    folder = user.owned_folders.find_by(route: params[:route])
+    binary = folder.binaries.find_by(name: params[:binary_name])
+    parent = binary.folder
+    binary.destroy
+    redirect_to parent.url, warning: "#{binary.name} Successfully Deleted!"
+  end
 private
 
   def get_name
