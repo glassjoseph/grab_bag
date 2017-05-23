@@ -43,7 +43,8 @@ gem 'database_cleaner'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
   gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 end
 
