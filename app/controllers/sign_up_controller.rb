@@ -16,7 +16,7 @@ class SignUpController < ApplicationController
     end
   end
 
-  private
+private
 
   def user_params
     params.require(:user).permit(:username, :phone, :name, :email, :password, :password_confirmation)
@@ -31,7 +31,7 @@ class SignUpController < ApplicationController
     session.delete(:user_info)
     user.update(facebook_user_params)
     session[:user_id] = user.id
-    redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+    redirect_to user.home.url, success: 'Account Created!'
   end
 
   def create_regular_user
@@ -39,7 +39,7 @@ class SignUpController < ApplicationController
     if user.save
       flash[:success] = "Successfully created new user!"
       session[:user_id] = user.id
-      redirect_to folder_path(username: user.username, route: 'home'), success: 'Account Created!'
+      redirect_to user.home.url, success: 'Account Created!'
     else
       flash.now[:danger] = "Account Creation Failed"
       @user = user

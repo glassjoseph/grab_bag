@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   def facebook_user
     if user = User.find_by(fb_id: request.env['omniauth.auth']['uid'])
       session[:user_id] = user.id
-      redirect_to folder_path(route: 'home', username: user.username)
+      redirect_to user.home.url
     else
       redirect_to sign_up_path(info: request.env['omniauth.auth'])
     end
@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       flash[:success] = 'Login successful'
 
-      redirect_to folder_path(route: 'home', username: user.username)
+      redirect_to user.home.url
     else
       flash[:danger] = 'Wrong Password'
 

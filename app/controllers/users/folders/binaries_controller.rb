@@ -1,4 +1,4 @@
-class Users::Folders::BinariesController < ApplicationController
+class Users::Folders::BinariesController < Users::BaseController
   before_action :set_s3_direct_post, only: [:new, :create]
 
   def new
@@ -36,6 +36,7 @@ private
   end
 
   def binary_params
+    byebug
     params.require(:binary).permit(:data_url)
   end
 

@@ -6,11 +6,11 @@ RSpec.feature "Visitor can create an account" do
     it "visitor can create an account with FB" do
       stub_oauth
 
-      visit '/'
+      visit landing_page_path
 
       click_on "Login with Facebook"
 
-      expect(current_path).to eq('/sign_up')
+      expect(current_path).to eq(sign_up_path)
 
       fill_in 'user[username]', with: 'samistheman'
       fill_in 'user[phone]', with: "5555555555"
@@ -38,7 +38,7 @@ RSpec.feature "Visitor can create an account" do
 
         click_on 'Create Account'
 
-        expect(current_path).to eq folder_path(User.last.username, User.last.home.route)
+        expect(current_path).to eq User.last.home.url
 
         within '.alert' do
           expect(page).to have_content 'Account Created!'
