@@ -1,8 +1,34 @@
-<%= form_for @user, url: sign_up_path do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <%= f.label :phone_number %>
-  <%= f.text_field :phone %>
+<%= render partial: 'shared/user_creation_errors' %>
 
-  <%= f.submit 'Create Account', class: 'btn' %>
+<div class="form-group", style="width:50%;">
+<%= form_for @user, url: sign_up_path do |f| %>
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "form-control", placeholder:'Your Username' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone, class: "form-control", placeholder:'Format: 123-456-7890' %>
+  </div>
+  <% if @user.fb_id.nil? %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", placeholder:'Your Full Name' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder:'Your Email' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Create Account', class: "btn btn-default" %>
 <% end %>
+</div

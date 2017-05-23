@@ -6,16 +6,24 @@ FactoryGirl.define do
     sequence :username do |n|
       "username#{n}"
     end
-    sequence :fb_id do |n|
-      n.to_s
-    end
     status 'active'
     sequence :email do |n|
       "email#{n}@email.com"
     end
     phone '5555555555'
+
+    sequence :fb_id do |n|
+      n.to_s
+    end
     token ENV['facebook_token']
     avatar_url 'https://socwork.wisc.edu/files/joe-glass-lg.jpg'
+
+    factory :regular_user do
+      token nil
+      fb_id nil
+      password 'banana'
+      password_confirmation 'banana'
+    end
 
     factory :user_with_folders do
       after(:create) do |user|
@@ -25,6 +33,7 @@ FactoryGirl.define do
           user.home.binaries << create(:binary, folder: user.home)
         end
       end
+
     end
   end
 
