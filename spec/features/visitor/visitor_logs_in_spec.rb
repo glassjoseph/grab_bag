@@ -14,12 +14,14 @@ feature 'log_in' do
 
       stub_oauth
 
-      visit '/'
+      visit landing_page_path
+
       within '.welcome' do
         click_on 'Login'
       end
 
-      expect(current_path).to eq("/#{user.username}/home")
+      expect(current_path).to eq user.home.url
+
       expect(page).to have_content "dummyaccount"
       expect(page).to have_link "Logout"
       expect(page).to_not have_link "Login"

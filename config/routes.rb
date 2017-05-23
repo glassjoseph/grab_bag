@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   get '/sign_up', to: 'sign_up#new'
   post '/sign_up', to: 'sign_up#create'
 
-
-  resources :folders, only: :index
-
   namespace :users, path: ":username" do
     get '/dashboard', to: 'users#show', as: :dashboard
     get '/dashboard/edit', to: 'users#edit', as: :dashboard_edit
@@ -28,7 +25,7 @@ Rails.application.routes.draw do
     get '/*route', to: 'folders#show', as: :folder
 
     post '/*route', to: 'folders/binaries#create', as: :binaries, constraints: { type: 'binary' }
-
   end
 
+  resources :folders, only: :index
 end
