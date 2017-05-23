@@ -21,7 +21,7 @@ RSpec.describe Comment do
       user = create(:user_with_folders)
       binary = user.home.binaries.first
       comment = Comment.new(text: 'This comment adds to the civil discussion of some topic LOL.', binary: binary, user: user)
-# binding.pry
+      
       expect(comment).to be_valid
     end
 
