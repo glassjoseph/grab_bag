@@ -11,7 +11,7 @@ To set up a local copy of this project, perform the following:
 * `cd` into the project's directory
 * Run `bundle install`
 * Run `bundle exec rake db:{create,migrate,seed}` to set up the database locally and seed it with files, folders, users, and comments
-* To login as an admin (locally), use these credentials - username: admin1, password: password
+* To login as an admin (in development), use these credentials - username: admin1, password: password
 * Run the application in the dev environment with `rails s`
 * Visit http://localhost:3000/ and enjoy
 
@@ -21,7 +21,11 @@ A visual representation of the schema is here:
 ![schema pic](app/assets/images/24_may_schema.png?raw=true)
 
 
-### Features
+### Features (the basic version)
+
+Visitor
+
+ * Visitor things
 
 User
 
@@ -29,6 +33,10 @@ User
  * She must provide a username and phone number for Two Factor Authentication purposes
  * A user can view and edit her details
  * A user can be an admin, at which point she can deactivate users, delete folders, files, and comments
+
+Admin
+
+ * Admin things
 
 
 Folder
@@ -49,5 +57,18 @@ Comment
 
  * A user can leave comments on any file that is owned or shared with her
 
+Like
+
+ * A user can like a comment or a file to which she has access
+
+### Features (the in-depth version)
+
+
 ### Design
 ### Contributors
+
+[Joseph Glass](https://github.com/glassjoseph)
+[Jonathan Kidd](https://github.com/jk1dd)
+[Sam Landfried](https://github.com/samlandfried)
+[Danny Radden](https://github.com/dannyradden)
+[Brett Schwartz](https://github.com/bschwartz10/)
