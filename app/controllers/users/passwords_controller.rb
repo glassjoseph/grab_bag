@@ -12,7 +12,7 @@ class Users::PasswordsController < ApplicationController
 
   def update
     require "pry"; binding.pry
-    if password_not_empty? && password_valid?
+    if passwords_not_empty? && passwords_equal?
       current_user.update(password_params)
       redirect_to users_dashboard_path(current_user.username), success: "Password Updated"
       session[:authenticated] = false
@@ -31,11 +31,11 @@ class Users::PasswordsController < ApplicationController
     params.require(:user).permit(:password, :password_confirmation)
   end
 
-  def password_not_empty?
+  def passwords_not_empty?
     params[:user][:password].length > 0 && params[:user][:password_confirmation].length > 0
   end
 
-  def password_valid?
+  def passwords_equal?
     params[:user][:password] == params[:user][:password_confirmation]
   end
 
