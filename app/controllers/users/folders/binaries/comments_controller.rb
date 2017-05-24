@@ -3,7 +3,7 @@ class Users::Folders::Binaries::CommentsController < ApplicationController
     binary = Binary.find_by(name: params[:binary_name])
     user = binary.folder.owner
     comment = binary.comments.new(comment_params)
-    comment.update(user_id: user.id)
+    comment.update(user_id: current_user.id)
     redirect_to binary.url
   end
 
