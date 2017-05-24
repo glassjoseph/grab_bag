@@ -1,12 +1,16 @@
-class Users::Folders::Binaries::LikesController < ApplicationController
+class Users::Folders::Binaries::CommentLikesController < ApplicationController
   def create
     # binding.pry
     # if params[:binary]
     binary = Binary.find_by(name: params[:binary_name])
     user = binary.folder.owner
-    like = binary.likes.new(user: user)
+    comment = binary.comments.first
+    like = comment.likes.new(user: user)
     like.update(like: true)
-    redirect_to binary.url
+    redirect_to(binary.url)
+    # like = binary.likes.new(user: user)
+    # like.update(like: true)
+    # redirect_to binary.url
     # else
     # binary = Binary.
     # user
