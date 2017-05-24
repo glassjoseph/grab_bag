@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
+
+  get '/admin/users', to: 'users#index'
+  patch '/admin/users', to: 'users#update'
+
   resources :confirmations, only: [:new, :create]
   resources :sessions, only: [:create]
 

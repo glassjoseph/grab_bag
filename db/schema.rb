@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170524012307) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "password_digest"
+    t.integer  "role",            default: 0
     t.string   "verification_code"
   end
 
