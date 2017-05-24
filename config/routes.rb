@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
 
+
+  get '/admin/users', to: 'users#index'
+  put '/admin/users', to: 'users#update'
+
+
   resources :sessions, only: [:create]
 
   get '/sign_up', to: 'sign_up#new'
