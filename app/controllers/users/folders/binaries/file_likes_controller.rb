@@ -1,4 +1,4 @@
-class Users::Folders::Binaries::LikesController < ApplicationController
+class Users::Folders::Binaries::FileLikesController < ApplicationController
   def create
     binary = Binary.find_by(name: params[:binary_name])
     user = binary.folder.owner
