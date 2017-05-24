@@ -47,7 +47,7 @@ RSpec.describe Comment do
   end
 
   context 'factory' do
-    it 'creates a valid' do
+    it 'creates a valid comment' do
       comment = create(:comment)
 
       expect(comment).to be_valid
