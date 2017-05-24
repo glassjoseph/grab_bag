@@ -25,6 +25,14 @@ FactoryGirl.define do
       password_confirmation 'banana'
     end
 
+    factory :inactive_user do
+      status 'inactive'
+    end
+
+    factory :admin do
+      role 'admin'
+    end
+
     factory :user_with_folders do
       after(:create) do |user|
         3.times do

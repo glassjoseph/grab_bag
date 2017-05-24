@@ -6,14 +6,16 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
 
-        <% if current_user %>
-          <li><%= link_to "My Profile", users_dashboard_path(current_user.username), class: 'nav-link' %></li>
+      <% if current_admin? %>
+        <li> <%= link_to admin_users_path(current_user), class: 'nav-link' do %> <span class="glyphicon glyphicon-list"></span> Users Index</li><% end %>
+      <% end %>
 
-          <li><%= link_to "Logout", signout_path, class: 'nav-link'%></li>
-        <% else %>
-          <li><a class="nav-link" href="<%= facebook_login_path %>">Login With Facebook</a></li>
-        <% end %>
-
+      <% if current_user %>
+        <li><%= link_to users_dashboard_path(current_user.username), class: 'nav-link' do %> <span class="glyphicon glyphicon-user"></span> My Profile</li> <% end %>
+        <li><%= link_to signout_path, class: 'nav-link' do %> <span class="glyphicon glyphicon-log-out"></span> Logout</li><% end %>
+      <% else %>
+        <li><a class="nav-link" href="<%= facebook_login_path %>"> Login With Facebook</a></li>
+      <% end %>
     </ul>
   </div>
 </nav>

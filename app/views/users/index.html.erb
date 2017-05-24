@@ -1,0 +1,31 @@
+    <table class="table">
+      <thead>
+      <th></th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th>Role</th>
+      <th></th>
+    </thead>
+    <tbody>
+
+    <% @users.each do |user| %>
+    <div class="<%=user.username%>">
+      <tr>
+      <td> <img src=" <%=user.avatar_url%>" class="img-thumbnail" width="30%" alt="User's Profile"></td>
+      <td><%=user.username%></td>
+      <td><%=user.name%></td>
+      <td><%=user.email%></td>
+      <td><%=user.phone%></td>
+      <td><%=user.status%></td>
+      <td><%=user.role%></td>
+      <td><%=change_status_button(user)%></td>
+      <td><%=change_role_button(user)%></td>
+      </tr>
+    </div>
+    <% end %>
+
+  </tbody>
+  </table>
