@@ -5,8 +5,7 @@ def new
 end
 
 def create
-  @user = current_user
-  if @user.verification_code == params[:verification_code]
+  if current_user.verification_code == params[:verification_code]
     session[:authenticated] = true
     redirect_to users_password_edit_path(current_user.username)
   else
