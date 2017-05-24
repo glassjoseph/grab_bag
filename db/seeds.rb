@@ -5,6 +5,7 @@
           phone: '5555555555',
           status: 'active',
           token: Faker::Internet.password,
+          password: "password",
           avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg').save(validate: false)
 
   user = User.last
