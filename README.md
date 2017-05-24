@@ -10,15 +10,15 @@ To set up a local copy of this project, perform the following:
 * Clone the repository: `git clone https://github.com/glassjoseph/grab_bag.git`
 * `cd` into the project's directory
 * Run `bundle install`
-* Run `bundle exec rake db:{create,migrate,seed}` to set up the database locally and seed it with files, folders, users, and comments.
-* To login as an admin (locally), use these credentials - email: admin@admin.com, password: password
+* Run `bundle exec rake db:{create,migrate,seed}` to set up the database locally and seed it with files, folders, users, and comments
+* To login as an admin (locally), use these credentials - username: admin1, password: password
 * Run the application in the dev environment with `rails s`
 * Visit http://localhost:3000/ and enjoy
 
 ### Schema
 
 A visual representation of the schema is here:
-![schema pic](http://i.dailymail.co.uk/i/pix/2010/04/28/article-0-09562375000005DC-283_964x699.jpg)
+![schema pic](app/assets/images/24_may_schema.png?raw=true)
 
 
 ### Features
