@@ -45,7 +45,6 @@ RSpec.feature do
 
       expect(current_path).to eq(binary.url)
       expect(page).to have_content("#{binary.name}")
-      # expect(page).to have_content("You do not have permission to delete that content.")
     end
   end
 end
