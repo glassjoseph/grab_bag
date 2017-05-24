@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User can share folders' do
   context 'User is logged in' do
-    scenario 'User shares his home folder' do
+    scenario 'User shares his home folder', focus: true do
       user = create :user
       home = user.home
       sam = create :user, email: 'rockstar@hollywood.com'
@@ -13,10 +13,10 @@ RSpec.feature 'User can share folders' do
 
       click_on 'Share this Folder'
 
-      within_frame 'share_folder_modal' do
-        fill_in 'email', with: 'rockstar@hollywood.com'
-        click_on 'Share'
-      end
+      expect(current_path).to eq users_folder_new_share_path(user.username, home.route)
+
+      fill_in 'users_folder_new_share[email]', with: 'rockstar@hollywood.com'
+      click_on 'Send Invite'
 
       expect(home).to be_in sam.folders_shared_with
     end
