@@ -5,6 +5,7 @@ class Binary < ApplicationRecord
 
   belongs_to :folder
   has_many :comments
+  has_many :likes, as: :likeable
 
   def url
     folder.url + '/' + name + '.' + extension
