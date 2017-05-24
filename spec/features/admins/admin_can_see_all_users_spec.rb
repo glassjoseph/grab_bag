@@ -22,10 +22,10 @@ RSpec.feature "Admin can see all users" do
         expect(page).to have_content(user1.name)
         expect(page).to have_content(user1.email)
         expect(page).to have_content(user1.phone)
-        # expect(page).to have_css(user1.avatar_url)
+        expect(page).to have_css("img[src*='#{user1.avatar_url}']")
         expect(page).to have_content("active")
         expect(page).to have_content("default")
-        expect(page).to have_link("Disable")
+        expect(page).to have_button("Disable")
       end
 
       within(".#{user2.username}") do
@@ -33,10 +33,10 @@ RSpec.feature "Admin can see all users" do
         expect(page).to have_content(user2.name)
         expect(page).to have_content(user2.email)
         expect(page).to have_content(user2.phone)
-        # expect(page).to have_css(user2.avatar_url)
+        expect(page).to have_css("img[src*='#{user2.avatar_url}']")
         expect(page).to have_content("inactive")
         expect(page).to have_content("default")
-        expect(page).to have_link("Enable")
+        expect(page).to have_button("Enable")
       end
     end
   end
