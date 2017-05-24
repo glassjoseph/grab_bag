@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/auth/facebook', as: :facebook_login
   get '/auth/facebook/callback', to: "sessions#create", as: :facebook_callback
-
+  resources :confirmations, only: [:new, :create]
   resources :sessions, only: [:create]
 
   get '/sign_up', to: 'sign_up#new'
@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get '/dashboard/edit', to: 'users#edit', as: :dashboard_edit
     patch '/dashboard/edit', to: 'users#update', as: :dashboard_patch
 
-    get '/dashboard/change_password', to: 'passwords#edit', as: :password_edit
+    get '/dashboard/change_password', to: 'passwords#reset', as: :password_reset
+    patch '/dashboard/change_password/update', to: 'passwords#update', as: :password_patch
+    get '/dashboard/change_password/edit', to: 'passwords#edit', as: :password_edit
 
     get '/*route/folder_new', to: 'folders#new', as: :new_folder
     get '/*route/:binary_name', to: 'folders/binaries#show', as: :binary, format: true

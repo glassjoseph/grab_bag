@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
 gem 'omniauth-facebook'
-
+gem 'twilio-ruby'
 gem 'bcrypt'
 gem 'database_cleaner'
 # Use Capistrano for deployment
