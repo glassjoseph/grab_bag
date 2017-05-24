@@ -1,9 +1,4 @@
 class Users::Folders::Binaries::CommentsController < ApplicationController
-  # def create
-  #   @binary = Binary.find_by()
-  #   @comment = Comment.new
-  # end
-
   def create
     binary = Binary.find_by(name: params[:binary_name])
     user = binary.folder.owner
