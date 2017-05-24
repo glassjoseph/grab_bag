@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     patch '/dashboard/edit', to: 'users#update', as: :dashboard_patch
 
     get '/dashboard/change_password', to: 'passwords#reset', as: :password_reset
+    patch '/dashboard/change_password/update', to: 'passwords#update', as: :password_patch
     get '/dashboard/change_password/edit', to: 'passwords#edit', as: :password_edit
 
     get '/*route/folder_new', to: 'folders#new', as: :new_folder
