@@ -1,5 +1,6 @@
-<div class="flash">
-  <% flash.each do |type, message| %>
-  <%= content_tag :div, message.html_safe, class: type %>
-  <% end %>
-</div>
+<% flash.each do |name, msg| %>
+  <div class="alert fade in alert-<%= name %> ">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <%= sanitize(msg) %>
+  </div>
+<% end %>

@@ -1,9 +1,0 @@
-<%= form_for current_user, url: dashboard_patch_path(current_user.username) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
-  <%= f.label :email %>
-  <%= f.text_field :email%>
-  <%= f.submit "Update Profile" %>
-<% end %>

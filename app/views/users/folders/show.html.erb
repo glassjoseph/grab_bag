@@ -1,4 +1,45 @@
-<h1><%= current_user.username %></h1>
+<h1><img class="img-thumbnail" src="https://thumb.ibb.co/htakav/default_profile.jpg" alt="default_profile" width="7%"> <%= current_user.username %></h1>
+<h2><%= @current_folder.name %> </h2>
 
+<%= link_to "New Folder", users_new_folder_path(current_user.username), class: "btn btn-success" %>
+<%= link_to "Upload File", users_new_binary_path(current_user.username, @current_folder.route), class: "btn btn-success"%>
 
-<%= link_to "New Folder", new_users_folder_path(current_user.username) %>
+  <% unless @current_folder.children.empty? %>
+    <div class="folder_contents">
+      <table class="table">
+        <div class="folders">
+          <th>Name</th>
+          <th>Type</th>
+          <th>Date Changed</th>
+          <th>Status</th>
+          <th></th>
+          <% @current_folder.folders.each do |folder|%>
+            <tr>
+              <td> <%= link_to folder.name, "#{folder.url}"%></td>
+              <td>  Folder </td>
+              <td> <%=folder.updated_at%></td>
+              <td> <%=folder.permission%></td>
+              <td> <button type="button" class="btn btn-primary"> Share </button>  </td>
+              <td> <%= link_to 'Delete', folder.url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+          <br>
+        </div>
+        <div class="binaries">
+          <% @current_folder.binaries.each do |binary|%>
+            <tr>
+              <td> <%=link_to(binary.name, binary.url)%></td>
+              <td> <%=binary.extension%></td>
+              <td> <%=binary.updated_at%></td>
+              <td></td>
+              <td> <a href='<%= binary.data_url %>' type="button" class="btn btn-primary"> Download </a>  </td>
+              <td> <%= link_to 'Delete', binary.url, data: {confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-danger' %>  </td>
+            </tr>
+          <% end %>
+          <br>
+        </div>
+      </table>
+    </div>
+  <% else %>
+    <h3> This folder is empty. Try uploading a file! </h3>
+  <% end %>

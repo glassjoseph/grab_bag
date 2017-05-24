@@ -1,0 +1,9 @@
+<div class="user-dashboard">
+  <p>Name: <%= current_user.name %></p>
+  <p>Phone Number: <%= current_user.phone %></p>
+  <p>Email: <%= current_user.email %></p>
+  <p>Username: <%= current_user.username %></p>
+
+<%= button_to "Edit Profile", users_dashboard_edit_path(current_user.username), method: :get, class: "btn btn-default" %>
+<%= button_to "Change Password", users_password_edit_path(current_user.username), method: :get, class: "btn btn-default" %>
+</div>
