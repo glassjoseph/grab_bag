@@ -25,26 +25,26 @@ A visual representation of the schema is here:
 
 Visitor
 
- * Visitor things
+ * A visitor is an un-logged in user
+ * He can view public folders, and that's about it
 
 User
 
- * A user can authenticate via Facebook or manually
- * She must provide a username and phone number for Two Factor Authentication purposes
+ * A user can sign up for an account via Facebook or create one manually
+ * Regardless of signup method, she must provide a username and phone number for Two Factor Authentication purposes
  * A user can view and edit her details
- * A user can be an admin, at which point she can deactivate users, delete folders, files, and comments
+ * A user can reset her password with a text confirmation (via Twilio)
 
 Admin
 
- * Admin things
-
+ * An admin can make other users into admins, deactivate users, and delete files and folders
 
 Folder
 
  * Every user is created with a home folder
  * When a new folder is created, its entire path is stored in the database
- * Folders can be made public (or private, if already public)
- * Folders can be shared by entering another user's username
+ * Folders can be created as public or private
+ * Folders can be shared by entering another user's email, which sends that user an email invite link
 
 
 File (in the schema, Binary)
@@ -55,20 +55,45 @@ File (in the schema, Binary)
 
 Comment
 
- * A user can leave comments on any file that is owned or shared with her
+ * A user can leave comments on any file that is owned or shared with him
 
 Like
 
- * A user can like a comment or a file to which she has access
+ * A user can like a comment or a file to which he has access, and can like it as many times as he wants, so feel free to go a bit crazy
 
 ### Features (the in-depth version)
 
+Visitor  
+ * some stuff here
+
+User  
+ * A user is created with a home folder, via a private `make_folder` method. `@user.home` will return this folder
+ * A user has `owned_folders`, a relationship through `Folder`, through the foreign key `user_id`
+
+Admin  
+ * some stuff here
+
+Folder  
+ * Folders have a method `children`. This includes both other folders and binaries stored in that folder
+ * Folders have a method `url`, which concatenates a complete route by combining the `owner.username` and the `route`
+
+Binary (File)
+ * Binary has a `url` method which builds the url by combining the `folder.url`, `name`, and `extension`
+
+Comment  
+ * some stuff here
+
+Like
+ * Related to Binaries and Comments through a polymorphic association
+
 
 ### Design
+
+ * We minted this with the [bootstrap gem](https://github.com/twbs/bootstrap-sass)
 ### Contributors
 
-[Joseph Glass](https://github.com/glassjoseph)
-[Jonathan Kidd](https://github.com/jk1dd)
-[Sam Landfried](https://github.com/samlandfried)
-[Danny Radden](https://github.com/dannyradden)
+[Joseph Glass](https://github.com/glassjoseph)  
+[Jonathan Kidd](https://github.com/jk1dd)  
+[Sam Landfried](https://github.com/samlandfried)  
+[Danny Radden](https://github.com/dannyradden)  
 [Brett Schwartz](https://github.com/bschwartz10/)
