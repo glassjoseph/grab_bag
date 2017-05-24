@@ -32,7 +32,7 @@ class Users::PasswordsController < ApplicationController
   end
 
   def password_not_empty?
-    params[:user][:password].length > 0 || params[:user][:password_confirmation].length > 0
+    params[:user][:password].length > 0 && params[:user][:password_confirmation].length > 0
   end
 
   def password_valid?
