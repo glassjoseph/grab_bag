@@ -57,7 +57,7 @@ private
   def binary_delete_permission
     folder = current_folder
     binary = folder.binaries.find_by(name: params[:binary_name])
-    current_user.id == binary.folder.owner.id
+    current_user.id == binary.folder.owner.id || current_user.admin?
   end
 
   def binary_authorize
