@@ -1,4 +1,4 @@
-<h1><img class="img-thumbnail" src="https://thumb.ibb.co/htakav/default_profile.jpg" alt="default_profile" width="7%"> <%= current_user.username %></h1>
+<h1><%= image_tag(current_user.avatar_url, class: "img-thumbnail")%> <%= current_user.username %></h1>
 <h2><%= @current_folder.name %> </h2>
 
 <%= link_to "New Folder", users_new_folder_path(current_user.username), class: "btn btn-success" %>
