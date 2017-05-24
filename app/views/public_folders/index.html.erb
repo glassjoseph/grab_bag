@@ -1,0 +1,24 @@
+<!-- <% @folders.each do |folder| %>
+  <%= link_to folder.name, folder.url %>
+<% end %> -->
+
+<h1>Public Folders</h1>
+<div class="folder_contents">
+  <table class="table">
+    <div class="folders">
+      <th>Name</th>
+      <th>Type</th>
+      <th>Date Changed</th>
+      <th>Owner</th>
+      <% @folders.each do |folder|%>
+        <tr>
+          <td> <%= link_to folder.name, "#{folder.url}"%></td>
+          <td>  Folder </td>
+          <td> <%=folder.updated_at%></td>
+          <td> <%=folder.owner.username%></td>
+        </tr>
+      <% end %>
+      <br>
+    </div>
+  </table>
+</div>

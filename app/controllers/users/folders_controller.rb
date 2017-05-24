@@ -10,7 +10,11 @@ class Users::FoldersController < Users::BaseController
   end
 
   def new
-    @folder = Folder.new
+    if current_folder.global? || current_folder.root_global?
+      @folder = Folder.new(permission: 'global')
+    else
+      @folder = Folder.new(permission: 'personal')
+    end
   end
 
   def create

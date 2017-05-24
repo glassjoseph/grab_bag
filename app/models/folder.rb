@@ -15,7 +15,7 @@ class Folder < ApplicationRecord
   belongs_to :parent, class_name: 'Folder', foreign_key: 'folder_id'
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
 
-  enum permission: %w(personal global)
+  enum permission: %w(personal global root_global)
 
   def children
     binaries | folders

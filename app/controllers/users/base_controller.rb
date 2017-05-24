@@ -25,7 +25,8 @@ private
   end
 
   def global_folder?
-    current_folder.global?
+    return true if current_folder.global?
+    return true if current_folder.root_global?
   end
 
   def shared_folder?

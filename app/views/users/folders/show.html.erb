@@ -1,8 +1,8 @@
 <h1><img class="img-thumbnail" src="https://thumb.ibb.co/htakav/default_profile.jpg" alt="default_profile" width="7%"> <%= current_user.username %></h1>
 <h2><%= @current_folder.name %> </h2>
 
-<%= link_to "New Folder", users_new_folder_path(current_user.username), class: "btn btn-success" %>
-<%= link_to "Upload File", users_new_binary_path(current_user.username, @current_folder.route), class: "btn btn-success"%>
+<%= link_to "New Folder", users_new_folder_path(@current_folder.owner.username), class: "btn btn-success" %>
+<%= link_to "Upload File", users_new_binary_path(@current_folder.owner.username, @current_folder.route), class: "btn btn-success"%>
 
   <% unless @current_folder.children.empty? %>
     <div class="folder_contents">
