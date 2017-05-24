@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523003445) do
+ActiveRecord::Schema.define(version: 20170524012307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,14 +62,15 @@ ActiveRecord::Schema.define(version: 20170523003445) do
     t.string   "username"
     t.string   "name"
     t.string   "fb_id"
-    t.integer  "status",          default: 0
+    t.integer  "status",            default: 0
     t.string   "email"
     t.string   "phone"
     t.string   "token"
     t.string   "avatar_url"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "password_digest"
+    t.string   "verification_code"
   end
 
   add_foreign_key "binaries", "folders"
