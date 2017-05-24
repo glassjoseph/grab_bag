@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
 
   get '/admin/users', to: 'users#index'
-  put '/admin/users', to: 'users#update'
+  patch '/admin/users', to: 'users#update'
 
 
   resources :sessions, only: [:create]
