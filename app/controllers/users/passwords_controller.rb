@@ -11,7 +11,6 @@ class Users::PasswordsController < ApplicationController
   end
 
   def update
-    require "pry"; binding.pry
     if passwords_not_empty? && passwords_equal?
       current_user.update(password_params)
       redirect_to users_dashboard_path(current_user.username), success: "Password Updated"
