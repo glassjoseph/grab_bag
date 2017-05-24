@@ -1,5 +1,6 @@
 class Users::Folders::BinariesController < Users::BaseController
   before_action :set_s3_direct_post, only: [:new, :create]
+  before_action :binary_authorize, only: [:destroy]
 
   def new
     @binary = Binary.new
@@ -37,7 +38,7 @@ class Users::Folders::BinariesController < Users::BaseController
     binary = folder.binaries.find_by(name: params[:binary_name])
     parent = binary.folder
     binary.destroy
-    redirect_to parent.url, warning: "#{binary.name} Successfully Deleted!"
+    redirect_to parent.url, success: "#{binary.name} Successfully Deleted!"
   end
 private
 
@@ -51,5 +52,19 @@ private
 
   def set_s3_direct_post
    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+
+  def binary_delete_permission
+    folder = current_folder
+    binary = folder.binaries.find_by(name: params[:binary_name])
+    current_user.id == binary.folder.owner.id
+  end
+
+  def binary_authorize
+    folder = current_folder
+    binary = folder.binaries.find_by(name: params[:binary_name])
+    unless binary_delete_permission
+      redirect_to binary.url, warning: "Sorry, you don't have perimission to delete #{binary.name}!"
+    end
   end
 end
