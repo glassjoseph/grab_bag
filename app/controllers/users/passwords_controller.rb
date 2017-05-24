@@ -6,12 +6,12 @@ class Users::PasswordsController < ApplicationController
   end
 
   def reset
-    @user = current_user
-    ConfirmationSender.send_confirmation_to(@user)
+    ConfirmationSender.send_confirmation_to(current_user)
     redirect_to new_confirmation_path
   end
 
   def update
+    require "pry"; binding.pry
     if password_not_empty? && password_valid?
       current_user.update(password_params)
       redirect_to users_dashboard_path(current_user.username), success: "Password Updated"
@@ -32,7 +32,7 @@ class Users::PasswordsController < ApplicationController
   end
 
   def password_not_empty?
-    params[:user][:password] != nil || params[:user][:password_confirmation] != nil
+    params[:user][:password].length > 0 || params[:user][:password_confirmation].length > 0
   end
 
   def password_valid?
