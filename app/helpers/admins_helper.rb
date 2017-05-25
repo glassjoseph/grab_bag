@@ -10,7 +10,7 @@ module AdminsHelper
     if user.active?
       button_to 'Disable', admin_users_path(current_user, user_id: user.id, user: { status: "inactive"}), method: :patch, class: "btn btn-danger"
     else
-      button_to 'Enable', admin_users_path(current_user, user_id: user.id, user: { status: "inactive"}), method: :patch, class: "btn btn-info"
+      button_to 'Enable', admin_users_path(current_user, user_id: user.id, user: { status: "active"}), method: :patch, class: "btn btn-info"
     end
   end
 end
