@@ -2,8 +2,6 @@ class Users::FoldersController < Users::BaseController
   before_action :folder_authorize, only: [:destroy]
 
   def show
-    user = User.find_by(username: params[:username])
-
     if @current_folder = current_folder
       session[:folder_id] = @current_folder.id
     else
@@ -27,6 +25,7 @@ class Users::FoldersController < Users::BaseController
 
     if folder.update(user_id: parent_folder.owner.id,
                      folder_id: parent_folder.id)
+      folder.vi == encrypt if folder.root_global?
       redirect_to folder.url, success: "Folder Successfully Created!"
     else
       redirect_to parent_folder.url, warning: "Folder already exists."

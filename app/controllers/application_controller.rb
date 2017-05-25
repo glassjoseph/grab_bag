@@ -13,15 +13,21 @@ class ApplicationController < ActionController::Base
 
   def current_folder
     return false unless params[:username] && params[:route]
-    route = check_route
     user = User.find_by(username: params[:username])
 
-    if route.length >= 60 && !route.include?('/')
-      decrypted_route = Folder.decrypt(route)
-      @current_folder = user.owned_folders.find_by(route: decrypted_route)
-    else
-      @current_folder = user.owned_folders.find_by(route: params[:route])
-    end
+    @current_folder = user.owned_folders.find_by(route: params[:route])
+  end
+
+  def current_public_folder
+    return false unless params[:route]
+    route =  params[:route].split('/')
+    username = route.shift
+    route = route.join
+    decrypted_url = Folder.decrypt(route)
+
+    user = User.find_by(username: username)
+
+    @current_public_folder = user.owned_folders.find_by(route: decrypted_route)
   end
 
   def current_admin?
@@ -36,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   def check_route
     route =  params[:route].split('/')
-    route.pop
+    route.shift
     route = route.join
   end
 

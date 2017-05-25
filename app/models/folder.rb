@@ -21,8 +21,8 @@ class Folder < ApplicationRecord
     binaries | folders
   end
 
-  def encrypted_url
-    '/' + owner.username + '/' + encrypt + '/' + slug
+  def encrypted_route
+    owner.username + '/' + encrypt + '/' + slug
   end
 
   def url

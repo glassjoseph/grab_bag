@@ -13,12 +13,12 @@
       <th></th>
       <% @folders.each do |folder|%>
         <tr>
-          <td> <%= link_to folder.name, public_folder_route%></td>
+          <td> <%= link_to folder.name, public_folder_path(folder.encrypted_route)%></td>
           <td>  Folder </td>
           <td> <%=folder.updated_at%></td>
           <td> <%=folder.owner.username%></td>
           <% if current_admin? %>
-          <td> <%= link_to 'Delete', folder.encrypted_url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
+          <td> <%= link_to 'Delete', public_folder_path(folder.encrypted_route), data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
           <% end %>
         </tr>
       <% end %>
