@@ -4,9 +4,12 @@
 <%= link_to users_like_file_path(@binary), method: :post, class: 'btn btn-warning' do %><span class="glyphicon glyphicon-thumbs-up">
 </span> Like File <% end %>
 
-<div class="likes">
-  <p>File Likes: <%= @binary.likes.count %> </p>
-</div>
+<span class="badge badge-pill badge-danger">
+  <div class="likes">
+    File Likes: <%= @binary.likes.count %>
+  </div>
+</span>
+
 
 <div class="preview">
 <%= render_preview(@binary) %>
@@ -20,8 +23,8 @@
       <div class="panel-heading"><%= comment.user.username %></div>
       <div class="panel-body"><%= comment.text %></div>
     </div>
-    <%= link_to users_like_comment_path(@binary, comment), method: :post, class: 'btn btn-warning'  do %> <span class="glyphicon glyphicon-thumbs-up">
+    <%= link_to users_like_comment_path(@binary.folder.owner.username, @binary.folder.route, @binary.name, comment_id: comment.id), method: :post, class: 'btn btn-warning'  do %> <span class="glyphicon glyphicon-thumbs-up">
     </span> Like Comment<% end %>
-    <p>Comment Likes: <%= comment.likes.count %></p>
+    <span class="badge badge-pill badge-danger">Comment Likes: <%= comment.likes.count %></span>
   <% end %>
 </div>
