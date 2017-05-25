@@ -15,7 +15,7 @@
           <th>Status</th>
           <th></th>
           <% @current_folder.folders.each do |folder|%>
-            <tr>
+            <tr class="folder">
               <td> <%= link_to folder.name, "#{folder.url}"%></td>
               <td>  Folder </td>
               <td> <%=folder.updated_at%></td>
@@ -28,7 +28,7 @@
         </div>
         <div class="binaries">
           <% @current_folder.binaries.each do |binary|%>
-            <tr>
+            <tr class="binary">
               <td> <%=link_to(binary.name, binary.url)%></td>
               <td> <%=binary.extension%></td>
               <td> <%=binary.updated_at%></td>

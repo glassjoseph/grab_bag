@@ -1,13 +1,11 @@
 require 'rails_helper'
-
+require 'helpers/admin_helper'
 
 RSpec.feature "Admin can see all users" do
   context "As a logged in Admin" do
 
     before :each do
-      @admin = create(:admin)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
-        #make a current_admin method?
+      stub_admin
     end
 
     scenario "Admin can visit users#index and see all users" do

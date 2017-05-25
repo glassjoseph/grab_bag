@@ -7,6 +7,10 @@ class Binary < ApplicationRecord
   has_many :comments
   has_many :likes, as: :likeable
 
+  enum status: %w(active inactive)
+
+  # default_scope { where(status: "active") }
+  default_scope { where(status: "active") }
   def url
     folder.url + '/' + name + '.' + extension
   end
