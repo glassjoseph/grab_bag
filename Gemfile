@@ -37,6 +37,7 @@ gem 'omniauth-facebook'
 gem 'twilio-ruby'
 gem 'bcrypt'
 gem 'database_cleaner'
+gem 'encryptor'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

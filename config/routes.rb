@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :public_folders, only: :index
+  get '/public_folders/*route', to: 'public_folders#show', as: :public_folder
+  delete '/public_folders/*route', to: 'public_folders#destroy', as: :public_folder_delete
+
   namespace :users, path: ":username" do
     get '/dashboard', to: 'users#show', as: :dashboard
     get '/dashboard/edit', to: 'users#edit', as: :dashboard_edit

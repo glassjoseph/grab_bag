@@ -13,8 +13,15 @@ class ApplicationController < ActionController::Base
 
   def current_folder
     return false unless params[:username] && params[:route]
+    route = check_route
     user = User.find_by(username: params[:username])
-    @current_folder = user.owned_folders.find_by(route: params[:route])
+
+    if route.length >= 60 && !route.include?('/')
+      decrypted_route = Folder.decrypt(route)
+      @current_folder = user.owned_folders.find_by(route: decrypted_route)
+    else
+      @current_folder = user.owned_folders.find_by(route: params[:route])
+    end
   end
 
   def current_admin?
@@ -23,6 +30,14 @@ class ApplicationController < ActionController::Base
 
   def authorize_admin
     render :file => "public/404.html", :status => 404 unless current_user.admin?
+  end
+
+  private
+
+  def check_route
+    route =  params[:route].split('/')
+    route.pop
+    route = route.join
   end
 
 end

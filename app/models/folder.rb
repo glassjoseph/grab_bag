@@ -21,11 +21,30 @@ class Folder < ApplicationRecord
     binaries | folders
   end
 
+  def encrypted_url
+    '/' + owner.username + '/' + encrypt + '/' + slug
+  end
+
   def url
     '/' + owner.username + '/' + route
   end
 
-private
+  def encrypt
+    cipher = OpenSSL::Cipher::Cipher.new('DES-EDE3-CBC').encrypt
+    cipher.key = Digest::SHA1.hexdigest ENV['encrypt_key']
+    s = cipher.update(route) + cipher.final
+    s.ljust(30).unpack('H*')[0].upcase
+  end
+
+  def self.decrypt(string)
+    cipher = OpenSSL::Cipher::Cipher.new('DES-EDE3-CBC').decrypt
+    cipher.key = Digest::SHA1.hexdigest ENV['encrypt_key']
+    s = [string].pack("H*").unpack("C*").pack("c*")
+
+    cipher.update(s.rstrip) + cipher.final
+  end
+
+  private
 
   def get_user
     self.user_id = parent.user_id if parent

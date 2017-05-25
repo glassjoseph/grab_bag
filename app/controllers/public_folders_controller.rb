@@ -4,4 +4,8 @@ class PublicFoldersController < ApplicationController
     @folders = Folder.where(permission: 'root_global')
   end
 
+  def show
+    
+  end
+
 end

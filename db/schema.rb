@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524233535) do
+ActiveRecord::Schema.define(version: 20170525040713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170524233535) do
     t.datetime "updated_at",             null: false
     t.integer  "permission", default: 0
     t.string   "slug"
+    t.string   "iv"
     t.index ["folder_id"], name: "index_folders_on_folder_id", using: :btree
     t.index ["slug"], name: "index_folders_on_slug", using: :btree
     t.index ["user_id"], name: "index_folders_on_user_id", using: :btree
