@@ -1,4 +1,4 @@
-1000.times do |n|
+1001.times do |n|
   User.new(name: Faker::LordOfTheRings.character,
           username: "user#{n}",
           email: Faker::Internet.email,
@@ -29,4 +29,4 @@
   n += 1
 end
 
-User.last.update(name: 'Gandalf', role:'admin1').save(validate: false)
+User.last.update(name: 'Gandalf', role:'admin', username: "admin1")

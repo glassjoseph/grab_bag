@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validate :check_phone_format
   validates_uniqueness_of :username, case_sensitive: false
 
+  default_scope { where(status: "active") }
   enum status: %w(active inactive)
   enum role: %w(default admin)
 
@@ -41,6 +42,17 @@ class User < ApplicationRecord
       user.avatar_url = auth["info"]["image"]
       user.token = auth["credentials"]["token"]
     end
+    
+  end
+  def disable
+    self.owned_folders.update_all(status: "inactive")
+    self.update(status: "inactive")
+  end
+
+  def enable
+    Folder.unscoped.where(user_id: self.id).update_all(status: "active")
+    self.update(status: "active")
+    # self.owned_folders.update_all(status: "inactive")
   end
 
 private
@@ -62,4 +74,5 @@ private
   def make_home
     owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
   end
+
 end
