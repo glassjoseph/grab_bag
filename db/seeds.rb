@@ -15,11 +15,11 @@
   folder1 = Folder.create!(name: "Food", parent: user.home, route:"#{user.home.route}/food")
   folder2 = Folder.create!(name: "Pies", parent: folder1, permission: 1 )
 
-  binary2 = Binary.create!(name: "Pizza", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/pizza.png", extension: ".png")
-  binary3 = Binary.create!(name: "Stromboli", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/stromboli.jpg", extension: ".jpg")
-  binary1 = Binary.create!(name: "Bratwurst", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/recipe_grilled-brat.pdf", extension: ".pdf")
+  binary2 = Binary.create!(name: "Pizza", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/27d37700-b571-4872-b056-b77ff1415737/default_profile.jpg", extension: "jpg")
+  binary3 = Binary.create!(name: "Stromboli", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/356361c2-79b0-401e-bad1-f04e5abe34a7/exWweVk.jpg", extension: "png")
+  binary1 = Binary.create!(name: "Bratwurst", folder: user.home, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/602c0f1e-4d79-4d13-8676-96f17bffca31/01076249a6024e01b172a6bc20468588.jpeg", extension: "jpg")
 
-  binary4 = Binary.create!(name: "Blackberry Pie ", folder: folder2, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/blackberry_pie.txt", extension: ".txt")
+  binary4 = Binary.create!(name: "Blackberry Pie ", folder: folder2, data_url: "https://s3-us-west-1.amazonaws.com/grabbag1701/uploads/416c121e-fe11-4cf1-baa8-cabd63ecbeaa/test.jpg", extension: "jpg")
 
   user.home.folders << folder1
   user.home.binaries << [binary1, binary2, binary3]
