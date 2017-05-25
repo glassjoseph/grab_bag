@@ -22,6 +22,7 @@ private
 
   def ancestor_authed?(parent)
     return true if current_user.folders_shared_with.include? parent
+
     ancestor_authed?(parent.parent) if parent.parent
   end
 

@@ -9,7 +9,8 @@ class Users::Folders::InvitesController < Users::BaseController
     sharing = params[:users_folder_new_share]
 
     inviter = current_user
-    folder = inviter.owned_folders.find_by(route: params[:route])
+    folder_owner = User.find_by(username: params[:username])
+    folder = folder_owner.owned_folders.find_by(route: params[:route])
     folder = Folder.global.find_by(route: params[:route]) unless folder
 
     invitee = User.find_by(email: sharing[:email])

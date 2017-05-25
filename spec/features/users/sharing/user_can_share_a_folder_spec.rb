@@ -40,7 +40,7 @@ RSpec.feature 'User can share folders' do
       end
     end
 
-    scenario 'User visits child folder in a folder shared with him', focus: true do
+    scenario 'User visits child folder in a folder shared with him' do
       user = create :user
       other_user = create :user_with_folders
       binary1 = other_user.home.binaries.first
@@ -85,10 +85,10 @@ RSpec.feature 'User can share folders' do
 
       visit other_user.home.url
 
-      expect(page.status).to eq 404
+      expect(page.status_code).to eq 404
     end
 
-    scenario 'User can download a binary in a shared folder' do
+    xscenario 'User can download a binary in a shared folder' do
       # https://stackoverflow.com/questions/29309324/how-to-test-csv-file-download-in-capybara-and-rspec
       user = create :user
       other_user = create :user
@@ -108,8 +108,8 @@ RSpec.feature 'User can share folders' do
       end
     end
 
-    scenario 'User can upload a file to a shared folder' do
-      file_path = '/spec/fixtures/files/test.txt'
+    xscenario 'User can upload a file to a shared folder' do
+      file_path = Rails.root + 'spec/fixtures/files/test.txt'
       user = create :user
       other_user = create :user
       user.folders_shared_with << other_user.home
@@ -120,14 +120,14 @@ RSpec.feature 'User can share folders' do
 
       click_on 'Upload File'
 
-      attach_file('ok', file_path)
+      attach_file('binary[data_url]', file_path)
 
       click_on 'Create Binary'
 
       expect(current_path).to eq Binary.last.url
     end
 
-    scenario 'User can share a shared folder' do
+    scenario 'User can share a shared folder', focus: true do
       user = create :user
       home = user.home
       other_user = create :user
@@ -137,14 +137,15 @@ RSpec.feature 'User can share folders' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(other_user)
 
-      visit home.url
+      visit landing_page_path
+      click_on 'Folders Shared with Me'
+
+      click_on home.name
 
       click_on 'Share this Folder'
 
-      within_frame 'share_folder_modal' do
-        fill_in 'email', with: 'rockstar@hollywood.com'
-        click_on 'Share'
-      end
+      fill_in 'users_folder_new_share[email]', with: 'rockstar@hollywood.com'
+      click_on 'Send Invite'
 
       expect(home).to be_in sam.folders_shared_with
     end
