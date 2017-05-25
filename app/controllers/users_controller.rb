@@ -2,12 +2,14 @@ class UsersController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @users = User.order(:name)
+    @users = User.unscoped.order(:name)
   end
 
   def update
-    user = User.find(params[:user_id])
-    user.update(user_params)
+    user = User.unscoped.find(params[:user_id])
+    user.update(user_params) if params[:user][:role]
+    user.disable if params[:user][:status] == "inactive"
+    user.enable if params[:user][:status] == "active"
     redirect_to admin_users_path
   end
 
