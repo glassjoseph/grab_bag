@@ -8,6 +8,7 @@ private
   end
 
   def authorized?
+    return true if current_admin?
     return true if current_folder && folder_authed?
     return true if personal_asset?
 

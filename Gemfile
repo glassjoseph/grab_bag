@@ -33,10 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
+gem 'aws-sdk-rails'
 gem 'omniauth-facebook'
 gem 'twilio-ruby'
 gem 'bcrypt'
 gem 'database_cleaner'
+gem 'will_paginate'
+gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -45,7 +48,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-nav'
   gem 'pry-stack_explorer'
-  gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :development do

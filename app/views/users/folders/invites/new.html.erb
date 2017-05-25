@@ -1,6 +1,6 @@
 <div class="form-group", style="width:50%;">
 <h3>Who do you want to share <em><%= @folder.name %></em> with?</h3>
-  <%= form_for :users_folder_new_share do |f| %>
+  <%= form_for :users_folder_new_share_invitation, url: users_folder_new_share_invitation_path do |f| %>
     <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control"  %>

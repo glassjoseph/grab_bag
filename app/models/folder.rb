@@ -15,7 +15,11 @@ class Folder < ApplicationRecord
   belongs_to :parent, class_name: 'Folder', foreign_key: 'folder_id'
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
 
+  default_scope { where(status: "active") }
+
   enum permission: %w(personal global root_global)
+  enum status: %w(active inactive)
+
 
   def children
     binaries | folders

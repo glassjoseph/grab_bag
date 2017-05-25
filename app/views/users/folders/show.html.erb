@@ -1,4 +1,4 @@
-<h1><%= image_tag(current_user.avatar_url, class: "img-thumbnail")%> <%= current_user.username %></h1>
+<h1><%= image_tag(current_folder.owner.avatar_url, class: "img-thumbnail")%> <%= current_folder.owner.username %></h1>
 
 
 <%= link_to "New Folder", users_new_folder_path(@current_folder.owner.username), class: "btn btn-success" %>
@@ -17,12 +17,12 @@
           <th></th>
           <th></th>
           <% @current_folder.folders.each do |folder|%>
-            <tr>
+            <tr class="folder">
               <td> <%= link_to folder.name, "#{folder.url}"%></td>
               <td>  Folder </td>
               <td> <%=folder.updated_at%></td>
               <td> <%=folder.permission%></td>
-              <td> <button type="button" class="btn btn-primary"> Share </button>  </td>
+              <td></td>
               <td> <%= link_to 'Delete', folder.url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
             </tr>
           <% end %>
@@ -30,7 +30,7 @@
         </div>
         <div class="binaries">
           <% @current_folder.binaries.each do |binary|%>
-            <tr>
+            <tr class="binary">
               <td> <%=link_to(binary.name, binary.url)%></td>
               <td> <%=binary.extension%></td>
               <td> <%=binary.updated_at%></td>
