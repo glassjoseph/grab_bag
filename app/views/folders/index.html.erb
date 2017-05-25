@@ -1,3 +1,20 @@
-<% @folders.each do |folder| %>
-  <%= link_to folder.name, folder.url %>
-<% end %>
+<h2>Public Folders</h2>
+
+<div class="folder_contents">
+  <table class="table">
+    <div class="folders">
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Date Changed</th>
+      <th>Status</th>
+      <th></th>
+      <% @folders.each do |folder| %>
+        <tr>
+          <td><%= link_to folder.name, folder.url %></td>
+          <td><%= folder.owner.username %></td>
+          <td> <%=folder.updated_at%></td>
+          <td> <%=folder.permission%></td>
+          <td> <button type="button" class="btn btn-primary"> Share </button>  </td>
+          <td> <%= link_to 'Delete', folder.url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
