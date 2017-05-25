@@ -29,15 +29,4 @@
   n += 1
 end
 
-User.new(name: Faker::LordOfTheRings.character,
-        username: "admin1",
-        email: Faker::Internet.email,
-        phone: '5555555555',
-        status: 'active',
-        token: Faker::Internet.password,
-        password: "password",
-        role: "admin",
-        avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg').save(validate: false)
-
-user = User.last
-user.owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
+User.last.update(name: 'Gandalf', role:'admin1').save(validate: false)
