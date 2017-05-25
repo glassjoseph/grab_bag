@@ -24,4 +24,5 @@ class ApplicationController < ActionController::Base
   def authorize_admin
     render :file => "public/404.html", :status => 404 unless current_user.admin?
   end
+
 end

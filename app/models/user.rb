@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validate :check_username_format
   validates :name, presence: true
   validates :status, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validate :check_email_format
   validates :phone, presence: true
   validate :check_phone_format
