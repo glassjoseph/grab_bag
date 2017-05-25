@@ -13,13 +13,14 @@ class User < ApplicationRecord
   validate :check_username_format
   validates :name, presence: true
   validates :status, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validate :check_email_format
   validates :phone, presence: true
   validate :check_phone_format
   validates_uniqueness_of :username, case_sensitive: false
 
   enum status: %w(active inactive)
+  enum role: %w(default admin)
 
   has_many :shared_folders
   has_many :folders_shared_with, through: :shared_folders, source: :folder

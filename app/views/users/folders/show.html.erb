@@ -1,9 +1,11 @@
-<h1><img class="img-thumbnail" src="https://thumb.ibb.co/htakav/default_profile.jpg" alt="default_profile" width="7%"> <%= current_user.username %></h1>
-<h2><%= @current_folder.name %> </h2>
+<h1><%= image_tag(current_user.avatar_url, class: "img-thumbnail")%> <%= current_user.username %></h1>
+
 
 <%= link_to "New Folder", users_new_folder_path(@current_folder.owner.username), class: "btn btn-success" %>
 <%= link_to "Upload File", users_new_binary_path(@current_folder.owner.username, @current_folder.route), class: "btn btn-success"%>
+<%= link_to "Share this Folder", users_folder_new_share_path, class: "btn btn-success"%>
 
+<h2><%= @current_folder.name %> </h2>
   <% unless @current_folder.children.empty? %>
     <div class="folder_contents">
       <table class="table">
@@ -12,6 +14,7 @@
           <th>Type</th>
           <th>Date Changed</th>
           <th>Status</th>
+          <th></th>
           <th></th>
           <% @current_folder.folders.each do |folder|%>
             <tr>

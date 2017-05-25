@@ -25,6 +25,14 @@ FactoryGirl.define do
       password_confirmation 'banana'
     end
 
+    factory :inactive_user do
+      status 'inactive'
+    end
+
+    factory :admin do
+      role 'admin'
+    end
+
     factory :user_with_folders do
       after(:create) do |user|
         3.times do
@@ -33,7 +41,6 @@ FactoryGirl.define do
           user.home.binaries << create(:binary, folder: user.home)
         end
       end
-
     end
   end
 
@@ -64,4 +71,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :comment do
+    before(:create) do |comment|
+      user = create(:user)
+      comment.binary = create(:binary, folder: user.home)
+    end
+    text "Comment"
+    user
+  end
 end

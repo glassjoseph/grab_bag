@@ -8,16 +8,22 @@ private
   end
 
   def authorized?
-    return true if folder_authed?
+    return true if current_folder && folder_authed?
     return true if personal_asset?
+
     return false
   end
 
   def folder_authed?
-    return false unless current_folder
-
     return true if shared_folder?
     return true if global_folder?
+    return true if ancestor_authed?(current_folder.parent) if current_folder.parent
+  end
+
+  def ancestor_authed?(parent)
+    return true if current_user.folders_shared_with.include? parent
+
+    ancestor_authed?(parent.parent) if parent.parent
   end
 
   def personal_asset?
@@ -32,6 +38,6 @@ private
   def shared_folder?
     user = User.find_by(username: params[:username])
     folder = user.owned_folders.find_by(route: params[:route])
-    current_user.folders_shared_with.include? folder
+    current_user.folders_shared_with.include? current_folder
   end
 end
