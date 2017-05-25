@@ -21,7 +21,7 @@ RSpec.feature "Admin can change a user's status" do
         expect(page).to have_button("Enable")
       end
 
-      expect(User.last.status).to eq("inactive")
+      expect(User.unscoped.last.status).to eq("inactive")
     end
 
     scenario "Admin can disable a user" do
