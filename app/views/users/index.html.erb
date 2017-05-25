@@ -14,7 +14,7 @@
     <% @users.each do |user| %>
     <div class="<%=user.username%>">
       <tr>
-      <td> <img src=" <%=user.avatar_url%>" class="img-thumbnail" width="30%" alt="User's Profile"></td>
+      <td> <img src=" <%=user.avatar_url%>" class="img-thumbnail" width="60px" alt="User's Profile"></td>
       <td><%=link_to user.username, users_folder_path(user.username, route: "home") %></td>
       <td><%=user.name%></td>
       <td><%=user.email%></td>
@@ -29,3 +29,5 @@
 
   </tbody>
   </table>
+
+  <%= will_paginate @users %>

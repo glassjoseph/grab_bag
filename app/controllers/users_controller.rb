@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @users = User.unscoped.order(:name)
+    @users = User.unscoped.order(:name).paginate(:page => params[:page], :per_page => 20)
   end
 
   def update
