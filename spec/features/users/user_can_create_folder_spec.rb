@@ -33,12 +33,12 @@ RSpec.feature "User can create a new folder" do
       expect(current_path).to eq(users_new_folder_path(user.username, user.home.route))
 
       fill_in "folder[name]", with: "Sweet jams"
-      choose "folder_permission_global"
+      choose "folder_permission_root_global"
 
       click_on "Create"
 
       expect(page).to have_content("Folder Successfully Created!")
-      expect(Folder.last.global?).to be true
+      expect(Folder.last.root_global?).to be true
       expect(current_path).to eq(Folder.last.url)
 
       visit public_folders_path

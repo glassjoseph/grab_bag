@@ -21,8 +21,8 @@ RSpec.feature 'User can see a navbar' do
     end
 
     scenario 'Public folders button' do
-      folder1 = create :folder, owner: user, parent: user.home, permission: :global
-      folder2 = create :folder, owner: user, parent: user.home, permission: :global
+      folder1 = create :folder, owner: user, parent: user.home, permission: :root_global
+      folder2 = create :folder, owner: user, parent: user.home, permission: :root_global
       folder3 = create :folder, owner: user, parent: user.home
 
       visit landing_page_path
