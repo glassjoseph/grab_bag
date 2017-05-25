@@ -6,7 +6,7 @@
           status: 'active',
           token: Faker::Internet.password,
           password: "password",
-          avatar_url: 'https://thumb.ibb.co/htakav/default_profile.jpg').save(validate: false)
+          avatar_url: Faker::Avatar.image("my-own-slug", "50x50")).save(validate: false)
 
   user = User.last
   user.owned_folders.new(name: 'home', route: 'home', slug: 'home').save(validate: false)
