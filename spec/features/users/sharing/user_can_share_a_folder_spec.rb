@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User can share folders' do
   context 'User is logged in' do
-    scenario 'User shares his home folder', focus: true do
+    scenario 'User shares his home folder' do
       user = create :user
       home = user.home
       sam = create :user, email: 'rockstar@hollywood.com'
@@ -32,15 +32,15 @@ RSpec.feature 'User can share folders' do
 
       click_on 'Folders Shared with Me'
 
-      expect(current_path).to eq shared_folders_path
+      expect(current_path).to eq users_shared_folders_path(user.username)
 
       within 'tr:first' do
         expect(page).to have_link other_user.home.name
-        expect(page).to have_content other_user.name
+        expect(page).to have_content other_user.username
       end
     end
 
-    scenario 'User visits child folder in a folder shared with him' do
+    scenario 'User visits child folder in a folder shared with him', focus: true do
       user = create :user
       other_user = create :user_with_folders
       binary1 = other_user.home.binaries.first
@@ -51,9 +51,9 @@ RSpec.feature 'User can share folders' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit shared_folders_path
+      visit users_shared_folders_path(user.username)
 
-      click_on 'Home'
+      click_on other_user.home.name
 
       expect(current_path).to eq other_user.home.url
       expect(page).to have_link binary1.name
@@ -74,7 +74,7 @@ RSpec.feature 'User can share folders' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit shared_folders_path
+      visit users_shared_folders_path(user.username)
 
       expect(page).to_not have_link 'Home'
       expect(page).to have_link folder.name

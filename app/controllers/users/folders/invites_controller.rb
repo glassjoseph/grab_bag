@@ -6,7 +6,6 @@ class Users::Folders::InvitesController < Users::BaseController
   end
 
   def create
-    byebug
     sharing = params[:users_folder_new_share]
 
     inviter = current_user

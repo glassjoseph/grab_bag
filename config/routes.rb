@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     patch '/dashboard/change_password/update', to: 'passwords#update', as: :password_patch
     get '/dashboard/change_password/edit', to: 'passwords#edit', as: :password_edit
 
+    get '/shared_folders', to: 'shared_folders#index', as: :shared_folders
+
     get '/*route/share', to: 'folders/invites#new', as: :folder_new_share
     post '/*route/share', to: 'folders/invites#create'
 
