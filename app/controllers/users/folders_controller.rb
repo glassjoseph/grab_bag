@@ -12,7 +12,11 @@ class Users::FoldersController < Users::BaseController
   end
 
   def new
-    @folder = Folder.new
+    if current_folder.global? || current_folder.root_global?
+      @folder = Folder.new(permission: 'global')
+    else
+      @folder = Folder.new(permission: 'personal')
+    end
   end
 
   def create
@@ -34,7 +38,11 @@ class Users::FoldersController < Users::BaseController
     folder = user.owned_folders.find_by(route: params[:route])
     parent = folder.parent
     folder.destroy
-    redirect_to parent.url, success: "#{folder.name} Successfully Deleted!"
+    if user == current_user
+      redirect_to parent.url, success: "#{folder.name} Successfully Deleted!"
+    else
+      redirect_to landing_page_path, success: "#{folder.name} Successfully Deleted!"
+    end
   end
 
 private

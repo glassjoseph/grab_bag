@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/sign_up', to: 'sign_up#create'
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
+  resources :public_folders, only: :index
   namespace :users, path: ":username" do
     get '/dashboard', to: 'users#show', as: :dashboard
     get '/dashboard/edit', to: 'users#edit', as: :dashboard_edit
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
     post '/*route/:binary_name', to: 'folders/binaries/comments#create', as: :binary_comments, format: true
 
     get '/*route', to: 'folders#show', as: :folder
+    get '/', to: 'users#show'
   end
 
-  resources :folders, only: :index
 end

@@ -45,18 +45,14 @@ RSpec.feature do
     it "can't delete someone else's folder" do
       user1 = create(:user)
       user2 = create(:user_with_folders)
-      user2.home.folders.first.update(permission: 'global')
+      user2.home.folders.first.update(permission: 'root_global')
       global_folder = user2.home.folders.first
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
 
-      visit folders_path
+      visit public_folders_path
 
-      click_on 'Delete'
-
-      expect(current_path).to eq(folders_path)
-      expect(page).to have_content("#{global_folder.name}")
-      expect(page).to have_content("Sorry, you don't have perimission to delete #{global_folder.name}!")
+      expect(page).to_not have_link("Delete")
     end
   end
 end

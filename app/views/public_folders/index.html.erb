@@ -1,0 +1,26 @@
+<h1>Public Folders</h1>
+<div class="folder_contents">
+  <table class="table">
+    <div class="folders">
+      <th width="75px"></th>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Date Changed</th>
+      <th>Status</th>
+      <th></th>
+      <% @folders.each do |folder|%>
+        <tr>
+          <td><%= image_tag(folder.owner.avatar_url) %></td>
+          <td> <%= link_to folder.name, "#{folder.url}"%></td>
+          <td> <%=folder.owner.username%></td>
+          <td> <%=folder.updated_at%></td>
+          <td> <%=folder.permission%></td>
+          <% if current_admin? %>
+          <td> <%= link_to 'Delete', folder.url, data: {confirm: 'Are you sure? This will delete all the contents inside the folder as well.'}, method: :delete, class: 'btn btn-danger' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      <br>
+    </div>
+  </table>
+</div>

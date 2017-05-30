@@ -1,17 +1,20 @@
 <div class="form-group", style="width:50%;">
   <%= form_for [:users, @folder] do |f| %>
-  <%= f.hidden_field :type, value: 'folder' %>
+    <%= f.hidden_field :type, value: 'folder' %>
     <div class="form-group">
-    <%= f.label :name  %>
-    <%= f.text_field :name, class: "form-control"  %>
+      <%= f.label :name  %>
+      <%= f.text_field :name, class: "form-control"  %>
     </div>
-    <div class="form-group">
-      <%= f.label :private %>
-    <%= f.radio_button :permission, "personal", checked: true%>
-    <%= f.label :public %>
-    <%= f.radio_button :permission, "global" %>
-  </div>
-
+    <% if @folder.personal? %>
+      <div class="form-group">
+        <%= f.label :private %>
+        <%= f.radio_button :permission, "personal", checked: true%>
+        <%= f.label :public %>
+        <%= f.radio_button :permission, "root_global" %>
+      </div>
+    <% else %>
+      <%= f.hidden_field(:permission, value: 'global') %>
+    <% end %>
     <%= f.submit "Create", class: "btn btn-default" %>
   <% end %>
 </div>

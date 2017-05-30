@@ -5,14 +5,14 @@ RSpec.feature do
     it "I can delete a binary that is not my own" do
       admin = create(:admin)
       user2 = create(:user_with_folders)
-      user2.home.folders.first.update(permission: 'global')
+      user2.home.folders.first.update(permission: 'root_global')
       global_folder = user2.home.folders.first
       global_folder.binaries << create(:binary, folder: global_folder)
       binary = global_folder.binaries.first
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
-      visit folders_path
+      visit public_folders_path
 
       click_on "#{global_folder.name}"
 

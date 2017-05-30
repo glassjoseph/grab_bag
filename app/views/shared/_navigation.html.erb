@@ -2,7 +2,7 @@
   <a class="navbar-brand" href='<%= landing_page_path %>'>Grab Bag</a>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="nav navbar-nav">
-        <li><%= link_to "Public Folders", folders_path, class: 'nav-link' %></li>
+        <li><%= link_to "Public Folders", public_folders_path, class: 'nav-link' %></li>
         <li><%= link_to "Folders Shared with Me", users_shared_folders_path(current_user.username), class: 'nav-link' if current_user %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

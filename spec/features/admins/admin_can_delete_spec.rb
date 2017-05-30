@@ -14,7 +14,7 @@ RSpec.feature "Admin can delete items" do
               end
       }.to change{user.home.folders.count}.from(3).to(2)
 
-    expect(current_path).to eq("/#{user.username}/home")
+    expect(current_path).to eq("/#{@admin.username}/home")
     expect(page).to have_content("Successfully Deleted!")
     end
 
